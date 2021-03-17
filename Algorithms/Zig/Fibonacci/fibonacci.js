@@ -8,5 +8,5 @@ WebAssembly.instantiate(typedArray, {
     }
 }).then(result => {
     const fib = result.instance.exports.fib;
-    fib(20);
+    fib(40);
 });
