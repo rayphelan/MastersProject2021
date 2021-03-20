@@ -1,0 +1,15 @@
+{
+  "name": "fibonacci",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "fibonacci_bg.wasm",
+    "fibonacci.js",
+    "fibonacci_bg.js",
+    "fibonacci.d.ts"
+  ],
+  "main": "fibonacci.js",
+  "types": "fibonacci.d.ts"
+}
