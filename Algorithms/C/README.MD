@@ -15,24 +15,31 @@ cd ~/MastersProject/emscripten/emsdk/upstream/emscripten
 Run this command:
 
 ```
-./emcc Ray/fibonacci.c 
+./emcc <filename>.c -o <filename>.js -s MODULARIZE
 ```
 
 This generates these files inside the Emscripten directory:
 
-> a.out.js
-> a.out.wasm
+> <filename>.js
+> <filename>.wasm
 
 Copy those files back to: 
 
 ```
-cp a.out.js ~/MastersProject/Project/Algorithms/C/Fibonacci/
-cp a.out.wasm ~/MastersProject/Project/Algorithms/C/Fibonacci/
+cp <filename>.js ~/MastersProject/Project/Algorithms/C/Fibonacci/
+cp <filename>.wasm ~/MastersProject/Project/Algorithms/C/Fibonacci/
 ```
 
 To run using NodeJS:
 
 ```
-cd ~/MastersProject/Project/Algorithms/C/Fibonacci
-node a.out.js
+
+var factory = require('<filename>.js');
+
+factory()
+
 ```
+
+More can be read here
+
+https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html

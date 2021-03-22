@@ -3,7 +3,7 @@
 Copy algorithm program to Emscripten location.
 
 ```
-cp ~/MastersProject/Project/Algorithms/CPP/Fibonacci/fibonacci.cpp ~/MastersProject/emscripten/emsdk/upstream/emscripten/Ray/
+cp ~/MastersProject/Project/Algorithms/CPP/Fibonacci/fibonacci.c ~/MastersProject/emscripten/emsdk/upstream/emscripten/Ray/
 ```
 
 Go Inside Emscripten directory: 
@@ -15,24 +15,31 @@ cd ~/MastersProject/emscripten/emsdk/upstream/emscripten
 Run this command:
 
 ```
-./emcc Ray/fibonacci.cpp
+./emcc <filename>.c -o <filename>.js -s MODULARIZE
 ```
 
 This generates these files inside the Emscripten directory:
 
-> a.out.js
-> a.out.wasm
+> <filename>.js
+> <filename>.wasm
 
 Copy those files back to: 
 
 ```
-cp a.out.js ~/MastersProject/Project/Algorithms/CPP/Fibonacci/
-cp a.out.wasm ~/MastersProject/Project/Algorithms/CPP/Fibonacci/
+cp <filename>.js ~/MastersProject/Project/Algorithms/CPP/Fibonacci/
+cp <filename>.wasm ~/MastersProject/Project/Algorithms/CPP/Fibonacci/
 ```
 
 To run using NodeJS:
 
 ```
-cd ~/MastersProject/Project/Algorithms/CPP/Fibonacci
-node a.out.js
+
+var factory = require('<filename>.js');
+
+factory()
+
 ```
+
+More can be read here
+
+https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
