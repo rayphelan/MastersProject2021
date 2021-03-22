@@ -33,3 +33,16 @@ node
 > const fibonacci = require('./index').fibonacci
 fibonacci(40)
 ```
+
+Add experimental tests to "experiment" folder and run
+```
+const myModule = require("..");
+const result = myModule.fibonacci(40);
+console.log(result);
+```
+
+Run experiment
+```
+npm experiment/index.js
+```
+
