@@ -1,5 +1,5 @@
 {
-  "name": "assemblyscript-wasm",
+  "name": "fibonacci",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@assemblyscript/loader": "^0.18.15",
-    "assemblyscript": "^0.18.15"
+    "@assemblyscript/loader": "^0.18.15"
   },
   "devDependencies": {
     "assemblyscript": "^0.18.15"
