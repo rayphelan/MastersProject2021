@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdint.h>
-
-static uint64_t fib(uint64_t n) {
+int fibonacci(int n) {
   if (n <= 1) return 1;
-  return fib(n - 1) + fib(n - 2);
-}
-
-int main(void) {
-  printf("%llu \n", fib(40));
-  return 0;
+  return fibonacci(n - 1) + fibonacci(n - 2);
 }

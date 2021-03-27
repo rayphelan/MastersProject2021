@@ -1,45 +1,39 @@
 # Compile to WASM with Emscripten
 
-Copy algorithm program to Emscripten location.
+### Compile as a SIDE_MODULE
 
 ```
-cp ~/MastersProject/Project/Algorithms/C/Fibonacci/fibonacci.c ~/MastersProject/emscripten/emsdk/upstream/emscripten/Ray/
+emcc fibonacci-3.c -Os -s SIDE_MODULE=1 -o fibonacci-3.wasm
 ```
 
-Go Inside Emscripten directory: 
-
+### Optional - Create WebAssembly Text File for visual purpose only
 ```
-cd ~/MastersProject/emscripten/emsdk/upstream/emscripten
-```
-
-Run this command:
-
-```
-./emcc <filename>.c -o <filename>.js -s MODULARIZE
+wasm2wat fibonacci-3.wasm -o fibonacci-3.wat
 ```
 
-This generates these files inside the Emscripten directory:
-
-> <filename>.js
-> <filename>.wasm
-
-Copy those files back to: 
-
+### Exact steps taken:
 ```
-cp <filename>.js ~/MastersProject/Project/Algorithms/C/Fibonacci/
-cp <filename>.wasm ~/MastersProject/Project/Algorithms/C/Fibonacci/
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ emcc fibonacci.c -o fibonacci.wasm -O3 -s SIDE_MODULE=1
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ wasm2wat fibonacci.wasm -o fibonacci.wat
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ node fibonacci.js
+165580141
 ```
 
-To run using NodeJS:
+### To use WASM from NodeJS:
 
 ```
+'use strict';
+const fs = require('fs');
+const bytes = fs.readFileSync('./fibonacci-3.wasm');
 
-var factory = require('<filename>.js');
-
-factory()
-
+(async () => {
+  const { instance, module } = await WebAssembly.instantiate(bytes);
+  console.log(instance.exports.fib(40));
+})();
 ```
 
-More can be read here
+### More can be read here:
 
-https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
+> https://www.joyent.com/blog/improved-wasm-support-coming-to-node
+
+> https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
