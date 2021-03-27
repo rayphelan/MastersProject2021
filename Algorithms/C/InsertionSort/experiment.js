@@ -7,7 +7,7 @@ const start = process.hrtime();
 
 wasmModule().then((instance) => {
 
-    instance._insertionSort(10);
+    instance._insertionSort(arraySize);
 
     // End Timer
     const diff = process.hrtime(start);
