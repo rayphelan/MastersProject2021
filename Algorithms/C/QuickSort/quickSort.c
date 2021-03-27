@@ -43,7 +43,6 @@ void qSort(int array[], int low, int high)
 int quickSort(int arraySize)
 {
     int array[arraySize];
-    int size = sizeof(array) / sizeof(array[0]);
     
     srand(0);
 
@@ -51,7 +50,7 @@ int quickSort(int arraySize)
         array[i] = rand();
     }
 
-    qSort(array, 0, size - 1);
+    qSort(array, 0, arraySize - 1);
 
     for (int i = 0; i < arraySize; i++)
         printf(" %d \n", array[i]);
