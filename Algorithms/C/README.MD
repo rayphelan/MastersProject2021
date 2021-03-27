@@ -13,7 +13,7 @@ wasm2wat fibonacci-3.wasm -o fibonacci-3.wat
 
 ### Exact steps taken:
 ```
-ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ emcc fibonacci.c -o fibonacci.wasm -O3 -s SIDE_MODULE=1
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ emcc fibonacci.c -o fibonacci.wasm -O2 -s SIDE_MODULE=1
 ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ wasm2wat fibonacci.wasm -o fibonacci.wat
 ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/C/Fibonacci$ node fibonacci.js
 165580141
