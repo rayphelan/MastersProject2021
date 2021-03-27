@@ -4,17 +4,17 @@
 int bubbleSort(int arraySize)
 {
 
-    int temp, i, j, array[arraySize];
+    int temp, array[arraySize];
 
     srand(0);
 
-    for (i = 0; i < arraySize; i++) {
+    for (int i = 0; i < arraySize; i++) {
         array[i] = rand();
     }
 
-    for (i = arraySize - 2; i >= 0; i--)
+    for (int i = arraySize - 2; i >= 0; i--)
     {
-        for (j = 0; j <= i; j++)
+        for (int j = 0; j <= i; j++)
         {
             if (array[j] > array[j + 1])
             {
@@ -25,7 +25,7 @@ int bubbleSort(int arraySize)
         }
     }
 
-    for (i = 0; i < arraySize; i++)
+    for (int i = 0; i < arraySize; i++)
         printf(" %d \n", array[i]);
 
     return 0;

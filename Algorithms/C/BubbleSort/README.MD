@@ -1,11 +1,11 @@
-```
-emcc bubbleSort.c -o bubbleSort.js -O2 -s MODULARIZE
-node experiment.js 
-```
-
-
+### Compile
 ```
 emcc bubbleSort2.c -o bubbleSort2.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_bubbleSort']"
+```
+
+### Run experiment
+```
+node experiment.js
 ```
 
 C programming does not allow to return an entire array as an argument to a function. However, you can return a pointer to an array by specifying the array's name without an index.
