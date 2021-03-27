@@ -1,35 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int bubbleSort(int arraySize)
 {
-    // int number[] = {12, 56, 2, 11, 1, 90};
 
-    int temp, i, j;
-    int count = 10;
-    int number[count];
+    int temp, i, j, array[arraySize];
 
     srand(0);
 
-    for (i = 0; i < count; i++) {
-        number[i] = rand();
+    for (i = 0; i < arraySize; i++) {
+        array[i] = rand();
     }
 
-    for (i = count - 2; i >= 0; i--)
+    for (i = arraySize - 2; i >= 0; i--)
     {
         for (j = 0; j <= i; j++)
         {
-            if (number[j] > number[j + 1])
+            if (array[j] > array[j + 1])
             {
-                temp = number[j];
-                number[j] = number[j + 1];
-                number[j + 1] = temp;
+                temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
             }
         }
     }
 
-    for (i = 0; i < count; i++)
-        printf(" %d \n", number[i]);
+    for (i = 0; i < arraySize; i++)
+        printf(" %d \n", array[i]);
 
     return 0;
 }
