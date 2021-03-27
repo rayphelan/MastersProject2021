@@ -1,45 +1,44 @@
 # Compile to WASM with Emscripten
 
-Copy algorithm program to Emscripten location.
+### Compile as a SIDE_MODULE
 
 ```
-cp ~/MastersProject/Project/Algorithms/CPP/Fibonacci/fibonacci.c ~/MastersProject/emscripten/emsdk/upstream/emscripten/Ray/
+emcc fibonacci.cpp -o fibonacci.wasm -O2 -s SIDE_MODULE=1
 ```
 
-Go Inside Emscripten directory: 
-
+### Optional - Create WebAssembly Text File for visual purpose only
 ```
-cd ~/MastersProject/emscripten/emsdk/upstream/emscripten
-```
-
-Run this command:
-
-```
-./emcc <filename>.c -o <filename>.js -s MODULARIZE
+wasm2wat fibonacci.wasm -o fibonacci.wat
 ```
 
-This generates these files inside the Emscripten directory:
-
-> <filename>.js
-> <filename>.wasm
-
-Copy those files back to: 
+### To use WASM from NodeJS:
 
 ```
-cp <filename>.js ~/MastersProject/Project/Algorithms/CPP/Fibonacci/
-cp <filename>.wasm ~/MastersProject/Project/Algorithms/CPP/Fibonacci/
+'use strict';
+const fs = require('fs');
+const bytes = fs.readFileSync('./fibonacci-3.wasm');
+
+(async () => {
+  const { instance, module } = await WebAssembly.instantiate(bytes);
+  console.log(instance.exports.fibonacci(40));
+})();
 ```
 
-To run using NodeJS:
+### Note about C++ function name mangling
+Wrap function in: extern "C" to prevent name mangling.
 
+> https://en.wikipedia.org/wiki/Name_mangling
+
+
+### Exact steps taken:
+```
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/CPP/Fibonacci$ emcc fibonacci.cpp -o fibonacci.wasm -O2 -s SIDE_MODULE=1
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/CPP/Fibonacci$ wasm2wat fibonacci.wasm -o fibonacci.wat
+ray@ray-VirtualBox:~/MastersProject/Project/Algorithms/CPP/Fibonacci$ node fibonacci.js
 ```
 
-var factory = require('<filename>.js');
+### More can be read here:
 
-factory()
+> https://www.joyent.com/blog/improved-wasm-support-coming-to-node
 
-```
-
-More can be read here
-
-https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
+> https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html
