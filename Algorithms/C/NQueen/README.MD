@@ -8,5 +8,5 @@ emcc nQueen.c -o nQueen.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_nQueen']"
 node experiment.js
 ```
 
-### Selection Sort
+### Source
 > https://www.geeksforgeeks.org/c-program-for-n-queen-problem-backtracking-3/

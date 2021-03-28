@@ -8,5 +8,5 @@ emcc shellSort.c -o shellSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_she
 node experiment.js
 ```
 
-### Selection Sort
+### Source
 > https://www.programiz.com/dsa/shell-sort

@@ -8,5 +8,5 @@ emcc mergeSort.c -o mergeSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_mer
 node experiment.js
 ```
 
-### Insertion Sort
+### Source
 > https://www.programiz.com/dsa/merge-sort

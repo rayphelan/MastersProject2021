@@ -8,5 +8,5 @@ emcc primeNumber.c -o primeNumber.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['
 node experiment.js
 ```
 
-### Selection Sort
+### Source
 > https://www.csinfo360.com/2020/01/write-program-to-find-nth-prime-number.html

@@ -8,5 +8,5 @@ emcc quickSort.c -o quickSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_qui
 node experiment.js
 ```
 
-### Quick Sort
+### Source
 > https://www.programiz.com/dsa/quick-sort

@@ -8,5 +8,5 @@ emcc heapSort.c -o heapSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_heapS
 node experiment.js
 ```
 
-### Insertion Sort
+### Source
 > https://www.programiz.com/dsa/heap-sort

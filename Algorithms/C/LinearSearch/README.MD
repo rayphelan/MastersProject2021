@@ -8,5 +8,5 @@ emcc linearSearch.c -o linearSearch.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=
 node experiment.js
 ```
 
-### Selection Sort
+### Source
 > https://www.programiz.com/dsa/linear-search

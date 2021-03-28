@@ -8,5 +8,5 @@ emcc selectionSort.c -o selectionSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTION
 node experiment.js
 ```
 
-### Selection Sort
+### Source
 > https://www.programiz.com/dsa/selection-sort
