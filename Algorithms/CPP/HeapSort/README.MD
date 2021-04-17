@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc heapSort.c -o heapSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_heapSort']"
+emcc heapSort.cpp -o heapSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_heapSort']"
 ```
 
 ### Execute
