@@ -11,6 +11,7 @@
         "utility": "cpp",
         "valarray": "cpp",
         "set": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "string": "cpp"
     }
 }

@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc quickSort.c -o quickSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_quickSort']"
+emcc quickSort.cpp -o quickSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_quickSort']"
 ```
 
 ### Execute

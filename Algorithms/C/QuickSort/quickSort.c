@@ -1,5 +1,3 @@
-// https://www.programiz.com/dsa/quick-sort
-
 #include <stdio.h>
 #include <stdlib.h>
 
