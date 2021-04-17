@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc binarySearch.c -o binarySearch.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_binarySearch']"
+emcc binarySearch.cpp -o binarySearch.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_binarySearch']"
 ```
 
 ### Execute
