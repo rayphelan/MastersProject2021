@@ -10,6 +10,7 @@
         "regex": "cpp",
         "utility": "cpp",
         "valarray": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "ostream": "cpp"
     }
 }

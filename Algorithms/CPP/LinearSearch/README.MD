@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc linearSearch.c -o linearSearch.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_linearSearch']"
+emcc linearSearch.cpp -o linearSearch.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_linearSearch']"
 ```
 
 ### Execute
