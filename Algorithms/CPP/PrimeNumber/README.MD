@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc primeNumber.c -o primeNumber.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_primeNumber']"
+emcc primeNumber.cpp -o primeNumber.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_primeNumber']"
 ```
 
 ### Execute
