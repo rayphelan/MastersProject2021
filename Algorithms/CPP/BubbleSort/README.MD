@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc bubbleSort.c -o bubbleSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_bubbleSort']"
+emcc bubbleSort.cpp -o bubbleSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_bubbleSort']"
 ```
 
 ### Execute
