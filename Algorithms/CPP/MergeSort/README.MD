@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc mergeSort.c -o mergeSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_mergeSort']"
+emcc mergeSort.cpp -o mergeSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_mergeSort']"
 ```
 
 ### Execute
@@ -10,7 +10,7 @@ node experiment.js
 
 ### Create WAT file
 ```
-wasm2wat linearSearch.wasm -o linearSearch.wat
+wasm2wat mergeSort.wasm -o mergeSort.wat
 ```
 
 ### Source
