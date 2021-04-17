@@ -2,31 +2,32 @@
 #include <stdlib.h>
 #include <time.h>
 
-int search(int array[], int x, int low, int high)
-{
-    // Repeat until the pointers low and high meet each other
-    while (low <= high)
-    {
-        int mid = low + (high - low) / 2;
+// Recursive Method
 
-        if (array[mid] == x)
-            return mid;
+int search(int array[], int x, int low, int high) {
+  if (high >= low) {
+    int mid = low + (high - low) / 2;
 
-        if (array[mid] < x)
-            low = mid + 1;
+    // If found at mid, then return it
+    if (array[mid] == x)
+      return mid;
 
-        else
-            high = mid - 1;
-    }
+    // Search the left half
+    if (array[mid] > x)
+      return search(array, x, low, mid - 1);
 
-    return -1;
+    // Search the right half
+    return search(array, x, mid + 1, high);
+  }
+
+  return -1;
 }
 
 int binarySearch(int arraySize)
 {
 
     int array[arraySize];
-    int maxNum = arraySize * 10;
+    int maxNum = arraySize;
 
     srand(time(0));
 

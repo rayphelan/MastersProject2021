@@ -20,6 +20,38 @@
       unreachable
       br 0 (;@1;)
     end)
+  (func $fib (type 0) (param i32)
+    (local i32 i32 i32 i32 i32 i32 i32)
+    global.get 0
+    local.set 1
+    i32.const 16
+    local.set 2
+    local.get 1
+    local.get 2
+    i32.sub
+    local.set 3
+    local.get 3
+    global.set 0
+    local.get 3
+    local.get 0
+    i32.store offset=12
+    local.get 3
+    i32.load offset=12
+    local.set 4
+    local.get 4
+    call $fibonacci
+    local.set 5
+    local.get 5
+    call $print
+    i32.const 16
+    local.set 6
+    local.get 3
+    local.get 6
+    i32.add
+    local.set 7
+    local.get 7
+    global.set 0
+    return)
   (func $fibonacci (type 2) (param i32) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
     global.get 0
@@ -190,42 +222,9 @@
     global.set 0
     local.get 39
     return)
-  (func $fib (type 0) (param i32)
-    (local i32 i32 i32 i32 i32 i32 i32)
-    global.get 0
-    local.set 1
-    i32.const 16
-    local.set 2
-    local.get 1
-    local.get 2
-    i32.sub
-    local.set 3
-    local.get 3
-    global.set 0
-    local.get 3
-    local.get 0
-    i32.store offset=12
-    local.get 3
-    i32.load offset=12
-    local.set 4
-    local.get 4
-    call $fibonacci
-    local.set 5
-    local.get 5
-    call $print
-    i32.const 16
-    local.set 6
-    local.get 3
-    local.get 6
-    i32.add
-    local.set 7
-    local.get 7
-    global.set 0
-    return)
   (table (;0;) 1 1 funcref)
   (memory (;0;) 2)
   (global (;0;) (mut i32) (i32.const 66592))
   (export "memory" (memory 0))
-  (export "fibonacci" (func $fibonacci))
   (export "fib" (func $fib))
   (data (;0;) (i32.const 1024) "integer overflow\00\00\00\00\00\04\00\00\10\00\00\00"))

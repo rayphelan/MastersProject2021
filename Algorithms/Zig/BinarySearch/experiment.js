@@ -1,5 +1,5 @@
 const fs = require('fs');
-const source = fs.readFileSync("./fibonacci.wasm");
+const source = fs.readFileSync("./binarySearch.wasm");
 const typedArray = new Uint8Array(source);
 
 WebAssembly.instantiate(typedArray, {
@@ -9,12 +9,12 @@ WebAssembly.instantiate(typedArray, {
         }
     }
 }).then(result => {
-    const fib = result.instance.exports.fib;
+    const fib = result.instance.exports.binarySearch;
 
     // Begin Timer
     const start = process.hrtime();
 
-    fib(40);
+    binarySearch(40);
 
     // End Timer
     const diff = process.hrtime(start);
