@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc nQueen.c -o nQueen.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_nQueen']"
+emcc nQueen.cpp -o nQueen.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_nQueen']"
 ```
 
 ### Execute
