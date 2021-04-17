@@ -12,6 +12,7 @@
         "valarray": "cpp",
         "set": "cpp",
         "ostream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "iostream": "cpp"
     }
 }

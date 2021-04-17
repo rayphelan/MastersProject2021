@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc shellSort.c -o shellSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_shellSort']"
+emcc shellSort.cpp -o shellSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_shellSort']"
 ```
 
 ### Execute
