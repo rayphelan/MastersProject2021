@@ -1,6 +1,6 @@
 ### Compile
 ```
-emcc insertionSort.c -o insertionSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_insertionSort']"
+emcc insertionSort.cpp -o insertionSort.js -O2 -s MODULARIZE -s "EXPORTED_FUNCTIONS=['_insertionSort']"
 ```
 
 ### Execute
