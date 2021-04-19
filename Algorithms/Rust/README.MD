@@ -16,3 +16,7 @@ wasm-pack new myproject
 wasm-pack build --target nodejs
 ```
 
+### Run with NodeJS
+```
+node pkg/<filename>.js
+```

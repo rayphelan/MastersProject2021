@@ -1,0 +1,15 @@
+{
+  "name": "selection-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "selection_sort_bg.wasm",
+    "selection_sort.js",
+    "selection_sort_bg.js",
+    "selection_sort.d.ts"
+  ],
+  "main": "selection_sort.js",
+  "types": "selection_sort.d.ts"
+}
