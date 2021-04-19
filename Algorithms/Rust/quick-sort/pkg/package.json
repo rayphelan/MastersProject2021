@@ -1,0 +1,15 @@
+{
+  "name": "quick-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "quick_sort_bg.wasm",
+    "quick_sort.js",
+    "quick_sort_bg.js",
+    "quick_sort.d.ts"
+  ],
+  "main": "quick_sort.js",
+  "types": "quick_sort.d.ts"
+}
