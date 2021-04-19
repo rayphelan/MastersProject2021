@@ -1,0 +1,15 @@
+{
+  "name": "binary-search",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "binary_search_bg.wasm",
+    "binary_search.js",
+    "binary_search_bg.js",
+    "binary_search.d.ts"
+  ],
+  "main": "binary_search.js",
+  "types": "binary_search.d.ts"
+}
