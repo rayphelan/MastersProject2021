@@ -1,0 +1,15 @@
+{
+  "name": "shell-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "shell_sort_bg.wasm",
+    "shell_sort.js",
+    "shell_sort_bg.js",
+    "shell_sort.d.ts"
+  ],
+  "main": "shell_sort.js",
+  "types": "shell_sort.d.ts"
+}
