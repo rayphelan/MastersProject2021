@@ -1,0 +1,15 @@
+{
+  "name": "knights-tour",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "knights_tour_bg.wasm",
+    "knights_tour.js",
+    "knights_tour_bg.js",
+    "knights_tour.d.ts"
+  ],
+  "main": "knights_tour.js",
+  "types": "knights_tour.d.ts"
+}
