@@ -1,0 +1,15 @@
+{
+  "name": "merge-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "merge_sort_bg.wasm",
+    "merge_sort.js",
+    "merge_sort_bg.js",
+    "merge_sort.d.ts"
+  ],
+  "main": "merge_sort.js",
+  "types": "merge_sort.d.ts"
+}
