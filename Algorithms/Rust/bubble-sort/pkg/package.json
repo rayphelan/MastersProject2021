@@ -1,0 +1,15 @@
+{
+  "name": "bubble-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "bubble_sort_bg.wasm",
+    "bubble_sort.js",
+    "bubble_sort_bg.js",
+    "bubble_sort.d.ts"
+  ],
+  "main": "bubble_sort.js",
+  "types": "bubble_sort.d.ts"
+}

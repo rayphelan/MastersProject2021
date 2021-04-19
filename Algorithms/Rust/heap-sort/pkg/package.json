@@ -1,0 +1,15 @@
+{
+  "name": "heap-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "heap_sort_bg.wasm",
+    "heap_sort.js",
+    "heap_sort_bg.js",
+    "heap_sort.d.ts"
+  ],
+  "main": "heap_sort.js",
+  "types": "heap_sort.d.ts"
+}
