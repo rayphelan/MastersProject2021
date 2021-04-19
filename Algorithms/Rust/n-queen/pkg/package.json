@@ -1,0 +1,15 @@
+{
+  "name": "n-queen",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "n_queen_bg.wasm",
+    "n_queen.js",
+    "n_queen_bg.js",
+    "n_queen.d.ts"
+  ],
+  "main": "n_queen.js",
+  "types": "n_queen.d.ts"
+}
