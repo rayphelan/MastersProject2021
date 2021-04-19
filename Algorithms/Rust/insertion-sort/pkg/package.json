@@ -1,0 +1,15 @@
+{
+  "name": "insertion-sort",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "insertion_sort_bg.wasm",
+    "insertion_sort.js",
+    "insertion_sort_bg.js",
+    "insertion_sort.d.ts"
+  ],
+  "main": "insertion_sort.js",
+  "types": "insertion_sort.d.ts"
+}
