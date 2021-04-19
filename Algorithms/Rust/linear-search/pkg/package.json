@@ -1,0 +1,15 @@
+{
+  "name": "linear-search",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "linear_search_bg.wasm",
+    "linear_search.js",
+    "linear_search_bg.js",
+    "linear_search.d.ts"
+  ],
+  "main": "linear_search.js",
+  "types": "linear_search.d.ts"
+}
