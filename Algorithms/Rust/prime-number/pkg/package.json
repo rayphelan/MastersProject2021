@@ -1,0 +1,15 @@
+{
+  "name": "prime-number",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "prime_number_bg.wasm",
+    "prime_number.js",
+    "prime_number_bg.js",
+    "prime_number.d.ts"
+  ],
+  "main": "prime_number.js",
+  "types": "prime_number.d.ts"
+}
