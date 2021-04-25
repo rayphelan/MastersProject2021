@@ -6,11 +6,11 @@ const arraySize: i32 = 5;
 // }
 
 const array = new Array<number>(arraySize);
-array[0] = 50;
-array[1] = 30;
-array[2] = 60;
-array[3] = 20;
-array[4] = 70;
+array[0] = 50; // 2
+array[1] = 30; // 1
+array[2] = 60; // 3
+array[3] = 20; // 0
+array[4] = 70; // 4
 
 // Function to swap the the position of two elements
 function swap(a: i32, b: i32) :void {
@@ -60,6 +60,6 @@ export function heapSort() :f64
 
   hSort();
 
-  return array[1];
+  return array[3];
 
 }

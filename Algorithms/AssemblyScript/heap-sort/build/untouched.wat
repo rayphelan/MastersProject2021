@@ -4265,7 +4265,7 @@
   local.get $0
   i32.store
   local.get $0
-  i32.const 1
+  i32.const 3
   call $~lib/array/Array<f64>#__get
   local.set $1
   global.get $~lib/memory/__stack_pointer
