@@ -1,47 +1,52 @@
 # AssemblyScript 
 https://www.assemblyscript.org/quick-start.html
 
-Start new project
+### Start new project
 ```
 npm init
 ```
 
-Install dependencies
+### Install dependencies
 ```
 npm install --save @assemblyscript/loader
 npm install --save-dev assemblyscript
 ```
 
-Initialize
+### Initialize
 ```
 npx asinit .
 ```
 
-Build WebAssembly
+### Edit sources in
+```
+/assembly/index.ts
+```
+
+### Build WebAssembly
 ```
 npm run asbuild
 ```
 
-Tests
+### Tests
 ```
 npm test
 ```
 
-Node
+### Node
 ```
 node
 > const fibonacci = require('./index').fibonacci
 fibonacci(40)
 ```
 
-Add experimental tests to "experiment" folder and run
+### Add experimental tests to "experiment" folder and run
 ```
 const myModule = require("..");
 const result = myModule.fibonacci(40);
 console.log(result);
 ```
 
-Run experiment
+### Run experiment
 ```
 npm experiment/index.js
 ```
