@@ -8,5 +8,6 @@ const result = myModule.binarySearch();
 // End timer
 const diff = process.hrtime(start);
 console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
+console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
 
-console.log(result);
+// console.log(result);
