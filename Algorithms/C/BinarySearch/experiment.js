@@ -2,6 +2,7 @@ const wasmModule = require('./binarySearch.js');
 
 // Start Timer
 const start = process.hrtime();
+
 wasmModule().then((instance) => {
 
     instance._binarySearch();

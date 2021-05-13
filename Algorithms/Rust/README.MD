@@ -16,6 +16,25 @@ wasm-pack new myproject
 wasm-pack build --target nodejs
 ```
 
+### Update gitignore (optional) - remove *
+```
+pkg/.gitignore
+```
+
+### Update JS: pkg/<filename>.js with timer
+```
+// Start Timer
+const start = process.hrtime();
+
+// Run WASM
+wasm.__wbindgen_start();
+
+// End Timer
+const diff = process.hrtime(start);
+console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
+console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
+```
+
 ### Run with NodeJS
 ```
 node pkg/<filename>.js
