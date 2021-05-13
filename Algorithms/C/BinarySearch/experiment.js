@@ -4,9 +4,7 @@ const wasmModule = require('./binarySearch.js');
 const start = process.hrtime();
 wasmModule().then((instance) => {
 
-    // for(let n = 1; n <= 10; n++) {
-        instance._binarySearch();
-    // }
+    instance._binarySearch();
 
     // End Timer
     const diff = process.hrtime(start);

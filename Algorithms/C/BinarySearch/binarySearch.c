@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 // #include <time.h>
-
-// Recursive Method
 
 int search(int array[], int x, int low, int high)
 {
@@ -48,15 +46,6 @@ int binarySearch()
       //   printf("%d Found at index %d \n", i, result);
       // }
   }
-
-  // if (result == -1)
-  // {
-  //   printf("%d Not found \n", x);
-  // }
-  // else
-  // {
-  //   printf("%d Found at index %d \n", x, result);
-  // }
 
   return 0;
 }
