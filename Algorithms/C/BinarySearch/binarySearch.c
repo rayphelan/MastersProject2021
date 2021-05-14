@@ -30,9 +30,9 @@ int binarySearch()
 
   int size = sizeof(array) / sizeof(array[0]);
 
-  for (int j = size -1; j >= 0; j--) {
+  // for (int j = size -1; j >= 0; j--) {
     
-    search(array, array[j], 0, size -1);
+  //   search(array, array[j], 0, size -1);
 
     // int result = search(array, array[j], 0, size -1);
 
@@ -61,7 +61,7 @@ int binarySearch()
       // }
     }
 
-  }
+  // }
 
   return 0;
 }
