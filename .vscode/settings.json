@@ -13,6 +13,7 @@
         "set": "cpp",
         "ostream": "cpp",
         "string": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "stdio.h": "c"
     }
 }

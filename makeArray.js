@@ -1,5 +1,5 @@
 const min = 0;
-const max = 1000;
+const max = 100000;
 const arrSorted = [];
 const arrRSorted = [];
 const arrRandom = [];
@@ -7,18 +7,24 @@ let c = 0;
 
 // Reverse Sorted
 for (let i = max - 1; i >= min; i--) {
-  arrRSorted[c]=i;
+  let randomFloat = Math.random().toFixed(7).toString().replace("0.",".");
+  let numStr = `${i}${randomFloat}`;
+  arrRSorted[c] = parseFloat(numStr);
   c++;
 }
 
 // Sorted
 for (let i = min; i < max; i++) {
-    arrSorted[i]=i;
+  let randomFloat = Math.random().toFixed(7).toString().replace("0.",".");
+  let numStr = `${i}${randomFloat}`;
+  arrSorted[i] = parseFloat(numStr);
 }
 
 // Random
 for (let i = min; i < max; i++) {
-  arrRandom[i]=i;
+  let randomFloat = Math.random().toFixed(7).toString().replace("0.",".");
+  let numStr = `${i}${randomFloat}`;
+  arrRandom[i] = parseFloat(numStr);
 }
 
 function shuffle(array) {

@@ -1,15 +1,10 @@
 let imports = {};
-imports['__wbindgen_placeholder__'] = module.exports;
 let wasm;
 
 /**
 */
 module.exports.main_js = function() {
     wasm.main_js();
-};
-
-module.exports.__wbg_log_981b7a741cc89e37 = function(arg0, arg1) {
-    console.log(arg0 === 0 ? undefined : arg1 >>> 0);
 };
 
 const path = require('path').join(__dirname, 'linear_search_bg.wasm');
@@ -20,5 +15,14 @@ const wasmInstance = new WebAssembly.Instance(wasmModule, imports);
 wasm = wasmInstance.exports;
 module.exports.__wasm = wasm;
 
+// Start Timer
+const start = process.hrtime();
+
+// Run WASM
 wasm.__wbindgen_start();
+
+// End Timer
+const diff = process.hrtime(start);
+console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
+console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
 
