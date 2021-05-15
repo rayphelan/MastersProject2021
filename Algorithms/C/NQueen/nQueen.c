@@ -1,6 +1,6 @@
 /* C/C++ program to solve N Queen Problem using
    backtracking */
-int N = 24;
+int N = 12;
 #include <stdbool.h>
 // #include <stdio.h>
 

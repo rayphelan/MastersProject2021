@@ -2,7 +2,7 @@
 // #include <cstdlib>
 // #include <iomanip>
 
-#define N 24
+#define N 12
 
 /* A utility function to print solution */
 // void printSolution(int board[N][N])
