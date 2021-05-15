@@ -280,7 +280,7 @@
   local.set $1
   f64.const 0
   local.set $3
-  i32.const 10
+  i32.const 100000
   local.set $4
   loop $while-continue|0
    local.get $0

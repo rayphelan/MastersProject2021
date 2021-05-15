@@ -5,7 +5,7 @@ export function primeNumber() :f64
     let i :i32;
     let letest :f64 = 0;
 
-    let rangenumber :i32 = 10;
+    let rangenumber :i32 = 100000;
 
     while (c != rangenumber)
     {

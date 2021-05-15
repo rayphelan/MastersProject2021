@@ -221,7 +221,7 @@
   local.set $1
   loop $while-continue|0
    local.get $4
-   i32.const 10
+   i32.const 100000
    i32.ne
    if
     i32.const 0
