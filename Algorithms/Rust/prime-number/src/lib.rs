@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: Vec<u64>);
-}
+// #[wasm_bindgen]
+// extern "C" {
+//     #[wasm_bindgen(js_namespace = console)]
+//     fn log(s: Vec<u64>);
+// }
 
 #[wasm_bindgen]
 pub fn primes_up_to(limit: u64) -> Vec<u64> {
@@ -19,6 +19,7 @@ pub fn primes_up_to(limit: u64) -> Vec<u64> {
 
 #[wasm_bindgen(start)]
 pub fn main_js() -> Result<(), JsValue> {
-    log(primes_up_to(20000));
+    // log(primes_up_to(100000));
+    primes_up_to(100000);
     Ok(())
 }
