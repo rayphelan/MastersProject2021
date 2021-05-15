@@ -1,19 +1,19 @@
 /* C/C++ program to solve N Queen Problem using
    backtracking */
-int N;
+int N = 24;
 #include <stdbool.h>
-#include <stdio.h>
+// #include <stdio.h>
 
 /* A utility function to print solution */
-void printSolution(int board[N][N])
-{
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-            printf(" %d ", board[i][j]);
-        printf("\n");
-    }
-}
+// void printSolution(int board[N][N])
+// {
+//     for (int i = 0; i < N; i++)
+//     {
+//         for (int j = 0; j < N; j++)
+//             printf(" %d ", board[i][j]);
+//         printf("\n");
+//     }
+// }
 
 /* A utility function to check if a queen can
    be placed on board[row][col]. Note that this
@@ -100,20 +100,19 @@ bool solveNQ()
         }
     }    
 
-    if (solveNQUtil(board, 0) == false)
-    {
-        printf("Solution does not exist");
-        return false;
-    }
+    // if (solveNQUtil(board, 0) == false)
+    // {
+    //     printf("Solution does not exist");
+    //     return false;
+    // }
 
-    printSolution(board);
+    // printSolution(board);
     return true;
 }
 
 // driver program to test above function
-int nQueen(int size)
+int nQueen()
 {
-    N = size;
     solveNQ();
     return 0;
 }

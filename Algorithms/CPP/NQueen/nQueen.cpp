@@ -1,19 +1,19 @@
-#include <iostream>
-#include <cstdlib>
-#include <iomanip>
+// #include <iostream>
+// #include <cstdlib>
+// #include <iomanip>
 
-#define N 8
+#define N 24
 
 /* A utility function to print solution */
-void printSolution(int board[N][N])
-{
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-            printf(" %d ", board[i][j]);
-        printf("\n");
-    }
-}
+// void printSolution(int board[N][N])
+// {
+//     for (int i = 0; i < N; i++)
+//     {
+//         for (int j = 0; j < N; j++)
+//             printf(" %d ", board[i][j]);
+//         printf("\n");
+//     }
+// }
 
 /* A utility function to check if a queen can
    be placed on board[row][col]. Note that this
@@ -100,17 +100,16 @@ bool solveNQ()
         }
     }    
 
-    using std::cout;
-    using std::endl;
+    // using std::cout;
+    // using std::endl;
 
+    // if (solveNQUtil(board, 0) == false)
+    // {
+    //     cout << "Solution does not exist" << endl;
+    //     return false;
+    // }
 
-    if (solveNQUtil(board, 0) == false)
-    {
-        cout << "Solution does not exist" << endl;
-        return false;
-    }
-
-    printSolution(board);
+    // printSolution(board);
     return true;
 }
 
