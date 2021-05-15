@@ -1,14 +1,15 @@
-#include <iostream>
+// #include <iostream>
 #include <cmath>
-using namespace std;
+// using namespace std;
 
 extern "C" {
-    int primeNumber(int rangenumber)
+    int primeNumber()
     {
+        int rangenumber = 100000;
         int c = 0, num = 2, i, letest = 0;
 
-        using std::cout;
-        using std::endl;
+        // using std::cout;
+        // using std::endl;
 
         while (c != rangenumber)
         {
@@ -29,7 +30,7 @@ extern "C" {
             }
             num = num + 1;
         }
-        cout << rangenumber << "th prime number is " << letest << endl;
+        // cout << rangenumber << "th prime number is " << letest << endl;
         return 0;
     }
 }

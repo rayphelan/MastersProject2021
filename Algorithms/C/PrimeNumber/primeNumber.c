@@ -1,7 +1,8 @@
-#include <stdio.h>
+// #include <stdio.h>
 #include <math.h>
-int primeNumber(int rangenumber)
+int primeNumber()
 {
+    int rangenumber = 100000;
     int c = 0, num = 2, i, letest = 0;
 
     while (c != rangenumber)
@@ -22,6 +23,6 @@ int primeNumber(int rangenumber)
         }
         num = num + 1;
     }
-    printf("%dth prime number is %d \n", rangenumber, letest);
+    // printf("%dth prime number is %d \n", rangenumber, letest);
     return 0;
 }
