@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: String);
-}
+// #[wasm_bindgen]
+// extern "C" {
+//     #[wasm_bindgen(js_namespace = console)]
+//     fn log(s: String);
+// }
 
 
 use std::cmp::max;
@@ -25,25 +25,25 @@ impl Board {
         }
     }
 
-    pub fn display(&self) {
-        let mut squares = vec![vec![false; self.height]; self.width];
+    // pub fn display(&self) {
+    //     let mut squares = vec![vec![false; self.height]; self.width];
 
-        for queen in &self.queens {
-            let &(qi, qj) = queen;
-            squares[qi][qj] = true;
-        }
+    //     for queen in &self.queens {
+    //         let &(qi, qj) = queen;
+    //         squares[qi][qj] = true;
+    //     }
 
-        for row in squares {
-            let mut line = String::from("");
-            for square in row {
-                match square {
-                    true => line += "Q ",
-                    false => line += ". "
-                }
-            }
-            log(line);
-        }
-    }
+    //     for row in squares {
+    //         let mut line = String::from("");
+    //         for square in row {
+    //             match square {
+    //                 true => line += "Q ",
+    //                 false => line += ". "
+    //             }
+    //         }
+    //         log(line);
+    //     }
+    // }
 }
 
 struct BoardGenerator {
@@ -131,10 +131,13 @@ pub fn backtrack(board : Board, queen_requirement: usize) -> Option<Board> {
 
 #[wasm_bindgen(start)]
 pub fn main_js() {
-    let board = Board { width: 8, height: 8, queens: vec![] };
-    if let Some(solution) = backtrack(board, 8) {
-        solution.display();
-    } else {
-        log("No solution found.".to_string())
-    }
+    let size : usize = 12;
+    let board = Board { width: size, height: size, queens: vec![] };
+    if let Some(_solution) = backtrack(board, size) {
+        // solution.display();
+    } 
+    // else {
+    //     log("No solution found.".to_string())
+    //     return false;
+    // }
 }
