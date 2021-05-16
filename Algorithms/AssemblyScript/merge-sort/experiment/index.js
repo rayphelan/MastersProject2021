@@ -15,15 +15,14 @@ for (n = 1; n <= iterations; n++) {
     // End timer
     const diff = process.hrtime(start);
 
-    // Log Results 
-    const result = `${diff[0]}.${diff[1]}`;
+    // Log Results
+    const result = (diff[0] * 1e9 + diff[1])/1000000000;
     results.push(result);
+    console.log(n, result);
 
     // console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
     // console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
     // console.log(wasm);
-
-    console.log(n);
 }
 
 console.log(results);
