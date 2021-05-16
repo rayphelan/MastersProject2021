@@ -1,16 +1,37 @@
 const myModule = require("..");
+const fs = require('fs');
 
-const { __getString } = myModule;
-// console.log(__getString);
+const results = [];
+const iterations = 30;
 
-// Begin timer
-const start = process.hrtime();
+for (n = 1; n <= iterations; n++) {
 
-const result = myModule.nQueen();
+    const { __getString } = myModule;
 
-// End timer
-const diff = process.hrtime(start);
-console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
-console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
+    // Begin timer
+    const start = process.hrtime();
 
-// console.log(__getString(result));
+    // Run WASM
+    const wasm = myModule.nQueen();
+
+    // End timer
+    const diff = process.hrtime(start);
+
+    // Log Results 
+    const result = `${diff[0]}.${diff[1]}`;
+    results.push(result);
+    
+    // console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
+    // console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
+    // console.log(__getString(wasm));
+
+    console.log(n);
+}
+
+console.log(results);
+
+// Save results to file
+fs.writeFile('results.txt', results.toString(), function (err) {
+    if (err) return console.log(err);
+    console.log('Filesaved');
+});

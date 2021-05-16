@@ -38,9 +38,9 @@ function shuffle(array) {
   return array;
 }
 
-a = shuffle(arrRandom);
+const a = shuffle(arrRandom);
 
-fs = require('fs');
+const fs = require('fs');
 
 // Random
 fs.writeFile('randomArray.txt', a.toString(), function (err) {
