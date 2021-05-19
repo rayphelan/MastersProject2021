@@ -62,7 +62,7 @@ module.exports.__wasm = wasm;
 const fs = require('fs');
 
 const results = [];
-const iterations = 30;
+const iterations = 120;
 
 for (n = 1; n <= iterations; n++) {
         
@@ -87,8 +87,11 @@ for (n = 1; n <= iterations; n++) {
 
 console.log(results);
 
-// Save results to file
-fs.writeFile('results.txt', results.toString(), function (err) {
+// Save to CSV
+const csv = results.join('\n');
+
+// Write File
+fs.writeFile('results.csv', csv, function (err) {
     if (err) return console.log(err);
     console.log('Filesaved');
 });

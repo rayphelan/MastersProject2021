@@ -2,7 +2,7 @@ const wasmModule = require('./binarySearch.js');
 const fs = require('fs');
 
 const results = [];
-const iterations = 30;
+const iterations = 120;
 
 
 wasmModule().then((instance) => {
@@ -30,8 +30,11 @@ wasmModule().then((instance) => {
 
     console.log(results);
 
-    // Save results to file
-    fs.writeFile('results.txt', results.toString(), function (err) {
+    // Save to CSV
+    const csv = results.join('\n');
+
+    // Write File
+    fs.writeFile('results.csv', csv, function (err) {
         if (err) return console.log(err);
         console.log('Filesaved');
     });
