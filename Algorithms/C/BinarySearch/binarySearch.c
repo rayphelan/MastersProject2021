@@ -45,9 +45,11 @@ int binarySearch()
     //   printf("%.7f Found at index %d \n", array[j], result);
     // }
 
+    int result;
+
     for (int i = 0; i <= size -1; i++) {
       
-      search(array, array[i], 0, size - 1);
+      result = search(array, array[i], 0, size - 1);
 
       // int result = search(array, array[i], 0, size - 1);
 
@@ -63,5 +65,5 @@ int binarySearch()
 
   // }
 
-  return 0;
+  return result;
 }

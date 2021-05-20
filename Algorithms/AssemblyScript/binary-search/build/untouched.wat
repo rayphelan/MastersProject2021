@@ -9,6 +9,7 @@
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
+ (type $none_=>_f64 (func (result f64)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
  (type $i32_f64_i32_i32_=>_f64 (func (param i32 f64 i32 i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
@@ -3761,57 +3762,6 @@
   end
   f64.const -1
  )
- (func $assembly/index/binarySearch
-  (local $0 i32)
-  (local $1 i32)
-  (local $2 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  i32.store
-  global.get $~lib/memory/__stack_pointer
-  i32.const 100000
-  i32.const 3
-  i32.const 3
-  i32.const 32
-  call $~lib/rt/__newArray
-  local.tee $1
-  i32.store
-  i32.const 0
-  local.set $0
-  loop $for-loop|0
-   local.get $0
-   i32.const 99999
-   i32.lt_s
-   local.set $2
-   local.get $2
-   if
-    local.get $1
-    local.get $1
-    local.get $0
-    call $~lib/array/Array<f64>#__get
-    i32.const 0
-    i32.const 99999
-    i32.const 1
-    i32.sub
-    call $assembly/index/search
-    drop
-    local.get $0
-    i32.const 1
-    i32.add
-    local.set $0
-    br $for-loop|0
-   end
-  end
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
- )
  (func $~lib/rt/__visit_globals (param $0 i32)
   (local $1 i32)
   i32.const 800256
@@ -3975,5 +3925,63 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $7
+ )
+ (func $assembly/index/binarySearch (result f64)
+  (local $0 i32)
+  (local $1 i32)
+  (local $2 f64)
+  (local $3 i32)
+  (local $4 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  i32.const 100000
+  i32.const 3
+  i32.const 3
+  i32.const 32
+  call $~lib/rt/__newArray
+  local.tee $1
+  i32.store
+  f64.const 0
+  local.set $2
+  i32.const 0
+  local.set $0
+  loop $for-loop|0
+   local.get $0
+   i32.const 100000
+   i32.lt_s
+   local.set $3
+   local.get $3
+   if
+    local.get $1
+    local.get $1
+    local.get $0
+    call $~lib/array/Array<f64>#__get
+    i32.const 0
+    i32.const 100000
+    i32.const 1
+    i32.sub
+    call $assembly/index/search
+    local.set $2
+    local.get $0
+    i32.const 1
+    i32.add
+    local.set $0
+    br $for-loop|0
+   end
+  end
+  local.get $2
+  local.set $4
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $4
  )
 )

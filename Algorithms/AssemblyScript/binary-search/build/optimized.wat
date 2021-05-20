@@ -1,12 +1,13 @@
 (module
- (type $none_=>_none (func))
  (type $i32_i32_=>_none (func (param i32 i32)))
+ (type $none_=>_none (func))
  (type $i32_=>_none (func (param i32)))
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
+ (type $none_=>_f64 (func (result f64)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
  (type $i32_f64_i32_i32_=>_f64 (func (param i32 f64 i32 i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
@@ -1955,7 +1956,70 @@
   end
   f64.const -1
  )
- (func $assembly/index/binarySearch
+ (func $~lib/rt/__visit_members (param $0 i32)
+  block $folding-inner0
+   block $invalid
+    block $~lib/arraybuffer/ArrayBufferView
+     block $~lib/string/String
+      block $~lib/arraybuffer/ArrayBuffer
+       local.get $0
+       i32.const 8
+       i32.sub
+       i32.load
+       br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $folding-inner0 $folding-inner0 $invalid
+      end
+      return
+     end
+     return
+    end
+    local.get $0
+    i32.load
+    local.tee $0
+    if
+     local.get $0
+     call $~lib/rt/itcms/__visit
+    end
+    return
+   end
+   unreachable
+  end
+  local.get $0
+  i32.load
+  call $~lib/rt/itcms/__visit
+ )
+ (func $~start
+  memory.size
+  i32.const 16
+  i32.shl
+  i32.const 817948
+  i32.sub
+  i32.const 1
+  i32.shr_u
+  global.set $~lib/rt/itcms/threshold
+  i32.const 801200
+  call $~lib/rt/itcms/initLazy
+  global.set $~lib/rt/itcms/pinSpace
+  i32.const 801232
+  call $~lib/rt/itcms/initLazy
+  global.set $~lib/rt/itcms/toSpace
+  i32.const 801376
+  call $~lib/rt/itcms/initLazy
+  global.set $~lib/rt/itcms/fromSpace
+ )
+ (func $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 801564
+  i32.lt_s
+  if
+   i32.const 817968
+   i32.const 818016
+   i32.const 1
+   i32.const 1
+   call $~lib/builtins/abort
+   unreachable
+  end
+ )
+ (func $assembly/index/binarySearch (result f64)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
@@ -1963,6 +2027,7 @@
   (local $4 i32)
   (local $5 i32)
   (local $6 i32)
+  (local $7 f64)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -2064,7 +2129,7 @@
   i32.store
   loop $for-loop|0
    local.get $2
-   i32.const 99999
+   i32.const 100000
    i32.lt_s
    if
     local.get $0
@@ -2072,9 +2137,9 @@
     local.get $2
     call $~lib/array/Array<f64>#__get
     i32.const 0
-    i32.const 99998
+    i32.const 99999
     call $assembly/index/search
-    drop
+    local.set $7
     local.get $2
     i32.const 1
     i32.add
@@ -2086,68 +2151,6 @@
   i32.const 4
   i32.add
   global.set $~lib/memory/__stack_pointer
- )
- (func $~lib/rt/__visit_members (param $0 i32)
-  block $folding-inner0
-   block $invalid
-    block $~lib/arraybuffer/ArrayBufferView
-     block $~lib/string/String
-      block $~lib/arraybuffer/ArrayBuffer
-       local.get $0
-       i32.const 8
-       i32.sub
-       i32.load
-       br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $folding-inner0 $folding-inner0 $invalid
-      end
-      return
-     end
-     return
-    end
-    local.get $0
-    i32.load
-    local.tee $0
-    if
-     local.get $0
-     call $~lib/rt/itcms/__visit
-    end
-    return
-   end
-   unreachable
-  end
-  local.get $0
-  i32.load
-  call $~lib/rt/itcms/__visit
- )
- (func $~start
-  memory.size
-  i32.const 16
-  i32.shl
-  i32.const 817948
-  i32.sub
-  i32.const 1
-  i32.shr_u
-  global.set $~lib/rt/itcms/threshold
-  i32.const 801200
-  call $~lib/rt/itcms/initLazy
-  global.set $~lib/rt/itcms/pinSpace
-  i32.const 801232
-  call $~lib/rt/itcms/initLazy
-  global.set $~lib/rt/itcms/toSpace
-  i32.const 801376
-  call $~lib/rt/itcms/initLazy
-  global.set $~lib/rt/itcms/fromSpace
- )
- (func $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 801564
-  i32.lt_s
-  if
-   i32.const 817968
-   i32.const 818016
-   i32.const 1
-   i32.const 1
-   call $~lib/builtins/abort
-   unreachable
-  end
+  local.get $7
  )
 )
