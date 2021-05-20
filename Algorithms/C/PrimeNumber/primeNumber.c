@@ -1,4 +1,4 @@
-#include <stdio.h>
+// #include <stdio.h>
 #include <math.h>
 int primeNumber()
 {
@@ -23,6 +23,6 @@ int primeNumber()
         }
         num = num + 1;
     }
-    printf("%d \n", letest);
-    return 0;
+    //printf("%d \n", letest);
+    return letest;
 }
