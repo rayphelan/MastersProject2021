@@ -1,11 +1,12 @@
 const myModule = require("..");
-const { __getString } = myModule;
-// const fs = require('fs');
+const fs = require('fs');
 
 const results = [];
 const iterations = 120;
 
 for (n = 1; n <= iterations; n++) {
+
+    const { __getString } = myModule;
 
     // Begin timer
     const start = process.hrtime();
@@ -19,11 +20,12 @@ for (n = 1; n <= iterations; n++) {
     // Log Results
     const result = (diff[0] * 1e9 + diff[1])/1000000000;
     results.push(result);
-    console.log(n, result);
+    
 
     // console.log(`Execution time: ${diff[0] * 1e9 + diff[1]} nanoseconds`);
     // console.log("Execution time (hr): %ds %dms", diff[0], diff[1]/1000000);
     console.log(__getString(wasm));
+    console.log(n, result);
 }
 
 console.log(results);

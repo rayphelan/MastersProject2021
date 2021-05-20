@@ -83,7 +83,7 @@
   (func (;12;) (type 2) (param i32)
     (local i32 i32 i32)
     global.get 0
-    i32.const 384
+    i32.const 432
     i32.sub
     local.tee 1
     global.set 0
@@ -91,11 +91,35 @@
       local.get 1
       local.get 0
       local.get 3
-      i32.const 96
+      i32.const 108
       i32.mul
       i32.add
       local.tee 2
       i32.load
+      i32.store offset=416
+      local.get 1
+      i32.const 416
+      i32.add
+      call 742
+      local.get 1
+      local.get 2
+      i32.load offset=4
+      i32.store offset=400
+      local.get 1
+      i32.const 400
+      i32.add
+      call 742
+      local.get 1
+      local.get 2
+      i32.load offset=8
+      i32.store offset=384
+      local.get 1
+      i32.const 384
+      i32.add
+      call 742
+      local.get 1
+      local.get 2
+      i32.load offset=12
       i32.store offset=368
       local.get 1
       i32.const 368
@@ -103,7 +127,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=4
+      i32.load offset=16
       i32.store offset=352
       local.get 1
       i32.const 352
@@ -111,7 +135,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=8
+      i32.load offset=20
       i32.store offset=336
       local.get 1
       i32.const 336
@@ -119,7 +143,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=12
+      i32.load offset=24
       i32.store offset=320
       local.get 1
       i32.const 320
@@ -127,7 +151,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=16
+      i32.load offset=28
       i32.store offset=304
       local.get 1
       i32.const 304
@@ -135,7 +159,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=20
+      i32.load offset=32
       i32.store offset=288
       local.get 1
       i32.const 288
@@ -143,7 +167,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=24
+      i32.load offset=36
       i32.store offset=272
       local.get 1
       i32.const 272
@@ -151,7 +175,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=28
+      i32.load offset=40
       i32.store offset=256
       local.get 1
       i32.const 256
@@ -159,7 +183,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=32
+      i32.load offset=44
       i32.store offset=240
       local.get 1
       i32.const 240
@@ -167,7 +191,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=36
+      i32.load offset=48
       i32.store offset=224
       local.get 1
       i32.const 224
@@ -175,7 +199,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=40
+      i32.load offset=52
       i32.store offset=208
       local.get 1
       i32.const 208
@@ -183,7 +207,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=44
+      i32.load offset=56
       i32.store offset=192
       local.get 1
       i32.const 192
@@ -191,7 +215,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=48
+      i32.load offset=60
       i32.store offset=176
       local.get 1
       i32.const 176
@@ -199,7 +223,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=52
+      i32.load offset=64
       i32.store offset=160
       local.get 1
       i32.const 160
@@ -207,7 +231,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=56
+      i32.load offset=68
       i32.store offset=144
       local.get 1
       i32.const 144
@@ -215,7 +239,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=60
+      i32.load offset=72
       i32.store offset=128
       local.get 1
       i32.const 128
@@ -223,7 +247,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=64
+      i32.load offset=76
       i32.store offset=112
       local.get 1
       i32.const 112
@@ -231,7 +255,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=68
+      i32.load offset=80
       i32.store offset=96
       local.get 1
       i32.const 96
@@ -239,7 +263,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=72
+      i32.load offset=84
       i32.store offset=80
       local.get 1
       i32.const 80
@@ -247,7 +271,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=76
+      i32.load offset=88
       i32.store offset=64
       local.get 1
       i32.const -64
@@ -255,7 +279,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=80
+      i32.load offset=92
       i32.store offset=48
       local.get 1
       i32.const 48
@@ -263,7 +287,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=84
+      i32.load offset=96
       i32.store offset=32
       local.get 1
       i32.const 32
@@ -271,7 +295,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=88
+      i32.load offset=100
       i32.store offset=16
       local.get 1
       i32.const 16
@@ -279,7 +303,7 @@
       call 742
       local.get 1
       local.get 2
-      i32.load offset=92
+      i32.load offset=104
       i32.store
       local.get 1
       call 742
@@ -290,12 +314,12 @@
       i32.const 1
       i32.add
       local.tee 3
-      i32.const 24
+      i32.const 27
       i32.ne
       br_if 0 (;@1;)
     end
     local.get 1
-    i32.const 384
+    i32.const 432
     i32.add
     global.set 0)
   (func (;13;) (type 3) (param i32 i32) (result i32)
@@ -304,7 +328,7 @@
     local.set 5
     block  ;; label = @1
       local.get 1
-      i32.const 23
+      i32.const 26
       i32.gt_s
       br_if 0 (;@1;)
       local.get 1
@@ -326,7 +350,7 @@
             loop  ;; label = @5
               local.get 0
               local.get 4
-              i32.const 96
+              i32.const 108
               i32.mul
               i32.add
               local.get 2
@@ -355,7 +379,7 @@
             loop  ;; label = @5
               local.get 0
               local.get 3
-              i32.const 96
+              i32.const 108
               i32.mul
               i32.add
               local.get 2
@@ -387,7 +411,7 @@
             loop  ;; label = @5
               local.get 0
               local.get 3
-              i32.const 96
+              i32.const 108
               i32.mul
               i32.add
               local.get 2
@@ -405,7 +429,7 @@
               i32.sub
               local.set 2
               local.get 3
-              i32.const 23
+              i32.const 26
               i32.lt_u
               local.set 8
               local.get 3
@@ -418,7 +442,7 @@
           end
           local.get 0
           local.get 4
-          i32.const 96
+          i32.const 108
           i32.mul
           i32.add
           local.get 1
@@ -437,14 +461,14 @@
           i32.store
         end
         local.get 4
-        i32.const 23
+        i32.const 26
         i32.lt_u
         local.set 5
         local.get 4
         i32.const 1
         i32.add
         local.tee 4
-        i32.const 24
+        i32.const 27
         i32.ne
         br_if 0 (;@2;)
       end
@@ -453,14 +477,14 @@
   (func (;14;) (type 10)
     (local i32 i32 i32)
     global.get 0
-    i32.const 2320
+    i32.const 2928
     i32.sub
     local.tee 0
     global.set 0
     block  ;; label = @1
       local.get 0
       i32.const 0
-      i32.const 2304
+      i32.const 2916
       call 736
       local.tee 0
       i32.const 0
@@ -468,7 +492,7 @@
       i32.eqz
       if  ;; label = @2
         local.get 0
-        i32.const 2312
+        i32.const 2920
         i32.add
         call 15
         local.tee 1
@@ -480,7 +504,7 @@
         i32.add
         call 145
         local.get 0
-        i32.const 2312
+        i32.const 2920
         i32.add
         i32.const 18628
         call 264
@@ -492,7 +516,7 @@
         call_indirect (type 3)
         local.set 2
         local.get 0
-        i32.const 2312
+        i32.const 2920
         i32.add
         call 259
         local.get 1
@@ -506,7 +530,7 @@
       call 12
     end
     local.get 0
-    i32.const 2320
+    i32.const 2928
     i32.add
     global.set 0)
   (func (;15;) (type 15) (result i32)

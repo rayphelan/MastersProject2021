@@ -1,0 +1,15 @@
+{
+  "name": "n-queen27",
+  "collaborators": [
+    "ray <rayphelan@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "n_queen27_bg.wasm",
+    "n_queen27.js",
+    "n_queen27_bg.js",
+    "n_queen27.d.ts"
+  ],
+  "main": "n_queen27.js",
+  "types": "n_queen27.d.ts"
+}
