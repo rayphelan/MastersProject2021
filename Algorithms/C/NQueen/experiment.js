@@ -2,7 +2,7 @@ const wasmModule = require('./nQueen.js');
 const fs = require('fs');
 
 const results = [];
-const iterations = 120;
+const iterations = 1;
 
 wasmModule().then((instance) => {
 

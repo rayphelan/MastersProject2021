@@ -1,19 +1,19 @@
 /* C/C++ program to solve N Queen Problem using
    backtracking */
-int N = 12;
+int N = 4;
 #include <stdbool.h>
-// #include <stdio.h>
+#include <stdio.h>
 
 /* A utility function to print solution */
-// void printSolution(int board[N][N])
-// {
-//     for (int i = 0; i < N; i++)
-//     {
-//         for (int j = 0; j < N; j++)
-//             printf(" %d ", board[i][j]);
-//         printf("\n");
-//     }
-// }
+void printSolution(int board[N][N])
+{
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+            printf(" %d ", board[i][j]);
+        printf("\n");
+    }
+}
 
 /* A utility function to check if a queen can
    be placed on board[row][col]. Note that this
@@ -25,21 +25,35 @@ bool isSafe(int board[N][N], int row, int col)
 {
     int i, j;
 
+    printf("row %d \n", row);
+    printf("col %d \n", col);
+
     /* Check this row on left side */
-    for (i = 0; i < col; i++)
-        if (board[row][i])
+    for (i = 0; i < col; i++) {
+        if (board[row][i]) {
+            printf("this row on left side=1a \n");
             return false;
+        }
+    }
+
 
     /* Check upper diagonal on left side */
-    for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
-        if (board[i][j])
+    for (i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+        if (board[i][j]) {
+            printf("upper diagonal on left side=1b \n");
             return false;
+        }
+    }
 
     /* Check lower diagonal on left side */
-    for (i = row, j = col; j >= 0 && i < N; i++, j--)
-        if (board[i][j])
+    for (i = row, j = col; j >= 0 && i < N; i++, j--) {
+        if (board[i][j]) {
+            printf("lower diagonal on left side=1c \n");
             return false;
+        }
+    }
 
+    printf("SAFE \n");
     return true;
 }
 
@@ -60,6 +74,7 @@ bool solveNQUtil(int board[N][N], int col)
           board[i][col] */
         if (isSafe(board, i, col))
         {
+            printf("adding queen to %d %d \n", i, col);
             /* Place this queen in board[i][col] */
             board[i][col] = 1;
 
@@ -67,6 +82,7 @@ bool solveNQUtil(int board[N][N], int col)
             if (solveNQUtil(board, col + 1))
                 return true;
 
+            printf("backtrack 0 \n");
             /* If placing queen in board[i][col]
                doesn't lead to a solution, then
                remove queen from board[i][col] */
@@ -76,6 +92,7 @@ bool solveNQUtil(int board[N][N], int col)
 
     /* If the queen cannot be placed in any row in
         this colum col  then return false */
+    
     return false;
 }
 
@@ -100,13 +117,13 @@ bool solveNQ()
         }
     }    
 
-    // if (solveNQUtil(board, 0) == false)
-    // {
-    //     printf("Solution does not exist");
-    //     return false;
-    // }
+    if (solveNQUtil(board, 0) == false)
+    {
+        printf("Solution does not exist");
+        return false;
+    }
 
-    // printSolution(board);
+    printSolution(board);
     return true;
 }
 

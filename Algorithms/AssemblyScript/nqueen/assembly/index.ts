@@ -1,34 +1,21 @@
-const N: i32 = 12;
-let board :string[][] = [
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-  ['0','0','0','0','0','0','0','0','0','0','0','0'],
-];
+const N: i32 = 10;
+let board :string[][] = [];
 
 let result :string = '';
 
 // /* A utility function to print solution */
-// function printSolution() :string
-// {
-//   for (let i :i32 = 0; i < N; i++)
-//   {
-//     for (let j :i32 = 0; j < N; j++) {
-//       let str :string = board[i][j];
-//       result = result.concat(str.concat(' '));
-//     }
-//     result = result.concat('\n');
-//   }
-//   return result;
-// }
+function printSolution() :string
+{
+  for (let i :i32 = 0; i < N; i++)
+  {
+    for (let j :i32 = 0; j < N; j++) {
+      let str :string = board[i][j];
+      result = result.concat(str.concat(' '));
+    }
+    result = result.concat('\n');
+  }
+  return result.concat('----------------------\n');
+}
 
 /* A utility function to check if a queen can
    be placed on board[row][col]. Note that this
@@ -108,12 +95,12 @@ function solveNQ() :boolean
   let i :i32;
   let j :i32;
 
-  // if (solveNQUtil(0) == false) {
-  //   result = "Solution does not exist";
-  //   return false;
-  // }
+  if (solveNQUtil(0) == false) {
+    result = "Solution does not exist";
+    return false;
+  }
 
-  // printSolution();
+  printSolution();
 
   return true;
 }
@@ -122,6 +109,20 @@ function solveNQ() :boolean
 // driver program to test above function
 export function nQueen() :string
 {
+  result = '';
+  board = [
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+    ['0','0','0','0','0','0','0','0','0','0',],
+  ];
+
   solveNQ();
   return result;
 }
