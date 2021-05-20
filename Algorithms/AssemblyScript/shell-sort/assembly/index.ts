@@ -20,10 +20,10 @@ function sSort() :void
     }
 }
 
-export function shellSort() :void
+export function shellSort() :f64
 {
 
     sSort();
 
-    // return array[0];
+    return array[0];
 }

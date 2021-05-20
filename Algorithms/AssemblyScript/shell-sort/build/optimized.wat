@@ -8,6 +8,7 @@
  (type $i32_f64_=>_none (func (param i32 f64)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
+ (type $none_=>_f64 (func (result f64)))
  (type $i32_=>_f64 (func (param i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (global $~lib/rt/itcms/total (mut i32) (i32.const 0))
@@ -2085,9 +2086,6 @@
   local.get $1
   f64.store
  )
- (func $assembly/index/shellSort
-  call $assembly/index/sSort
- )
  (func $~lib/rt/__visit_members (param $0 i32)
   block $invalid
    block $~lib/array/Array<f64>
@@ -2139,15 +2137,7 @@
   call $~lib/rt/itcms/initLazy
   global.set $~lib/rt/itcms/fromSpace
  )
- (func $assembly/index/sSort
-  (local $0 i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 f64)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
+ (func $~stack_check
   global.get $~lib/memory/__stack_pointer
   i32.const 801652
   i32.lt_s
@@ -2159,6 +2149,17 @@
    call $~lib/builtins/abort
    unreachable
   end
+ )
+ (func $assembly/index/sSort
+  (local $0 i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
   global.get $~lib/memory/__stack_pointer
   i64.const 0
   i64.store
@@ -2240,6 +2241,27 @@
   end
   global.get $~lib/memory/__stack_pointer
   i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $assembly/index/shellSort (result f64)
+  (local $0 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  call $assembly/index/sSort
+  global.get $~lib/memory/__stack_pointer
+  i32.const 801088
+  i32.store
+  i32.const 0
+  call $~lib/array/Array<f64>#__get
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
   i32.add
   global.set $~lib/memory/__stack_pointer
  )

@@ -17,9 +17,9 @@ function sSort() :void {
   }
 }
 
-export function selectionSort(): void {
+export function selectionSort(): f64 {
 
   sSort();
 
-  // return array[0];
+  return array[0];
 }

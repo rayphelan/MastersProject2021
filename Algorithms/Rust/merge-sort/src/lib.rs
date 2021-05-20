@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
-// #[wasm_bindgen]
-// extern "C" {
-//     #[wasm_bindgen(js_namespace = console)]
-//     fn log(s: String);
-// }
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: f64);
+}
 
 pub fn mergesort(arr: &mut [f64]) {
     let mid = arr.len() / 2;
@@ -66,4 +66,5 @@ pub fn main_js() {
 
     mergesort(&mut numbers);
     // display(&mut numbers);
+    log(numbers[0]);
 }

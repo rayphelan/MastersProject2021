@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
-// #[wasm_bindgen]
-// extern "C" {
-//     #[wasm_bindgen(js_namespace = console)]
-//     fn log(s: String);
-// }
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: f64);
+}
 
 pub fn heapsort(arr: &mut [f64]) {
     // -- Heapify part --
@@ -59,4 +59,5 @@ pub fn main_js() {
 
     heapsort(&mut numbers);
     // display(&mut numbers);
+    log(numbers[0]);
 }

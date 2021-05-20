@@ -45,11 +45,11 @@ function hSort() :void
   }
 }
 
-export function heapSort() :void
+export function heapSort() :f64
 {
 
   hSort();
 
-  // return array[0];
+  return array[0];
 
 }

@@ -74,9 +74,9 @@ function mSort(l :i32, r :i32) :void
     }
 }
 
-export function mergeSort() :void
+export function mergeSort() :f64
 {
     mSort(0, arraySize - 1);
 
-    // return array[0];
+    return array[0];
 }

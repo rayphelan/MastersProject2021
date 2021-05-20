@@ -8,6 +8,7 @@
  (type $i32_f64_=>_none (func (param i32 f64)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
+ (type $none_=>_f64 (func (result f64)))
  (type $i32_=>_f64 (func (param i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (global $~lib/rt/itcms/total (mut i32) (i32.const 0))
@@ -2085,46 +2086,6 @@
   local.get $1
   f64.store
  )
- (func $assembly/index/heapSort
-  (local $0 i32)
-  i32.const 49999
-  local.set $0
-  loop $for-loop|0
-   local.get $0
-   i32.const 0
-   i32.ge_s
-   if
-    i32.const 100000
-    local.get $0
-    call $assembly/index/heapify
-    local.get $0
-    i32.const 1
-    i32.sub
-    local.set $0
-    br $for-loop|0
-   end
-  end
-  i32.const 99999
-  local.set $0
-  loop $for-loop|1
-   local.get $0
-   i32.const 0
-   i32.ge_s
-   if
-    i32.const 0
-    local.get $0
-    call $assembly/index/swap
-    local.get $0
-    i32.const 0
-    call $assembly/index/heapify
-    local.get $0
-    i32.const 1
-    i32.sub
-    local.set $0
-    br $for-loop|1
-   end
-  end
- )
  (func $~lib/rt/__visit_members (param $0 i32)
   block $invalid
    block $~lib/array/Array<f64>
@@ -2307,6 +2268,64 @@
    local.get $3
    call $assembly/index/heapify
   end
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $assembly/index/heapSort (result f64)
+  (local $0 i32)
+  (local $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  i32.const 49999
+  local.set $0
+  loop $for-loop|0
+   local.get $0
+   i32.const 0
+   i32.ge_s
+   if
+    i32.const 100000
+    local.get $0
+    call $assembly/index/heapify
+    local.get $0
+    i32.const 1
+    i32.sub
+    local.set $0
+    br $for-loop|0
+   end
+  end
+  i32.const 99999
+  local.set $0
+  loop $for-loop|1
+   local.get $0
+   i32.const 0
+   i32.ge_s
+   if
+    i32.const 0
+    local.get $0
+    call $assembly/index/swap
+    local.get $0
+    i32.const 0
+    call $assembly/index/heapify
+    local.get $0
+    i32.const 1
+    i32.sub
+    local.set $0
+    br $for-loop|1
+   end
+  end
+  global.get $~lib/memory/__stack_pointer
+  i32.const 801088
+  i32.store
+  i32.const 0
+  call $~lib/array/Array<f64>#__get
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.add

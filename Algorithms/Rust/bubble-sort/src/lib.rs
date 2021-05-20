@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
-// #[wasm_bindgen]
-// extern "C" {
-//     #[wasm_bindgen(js_namespace = console)]
-//     fn log(s: String);
-// }
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: f64);
+}
 
 
 pub fn bubble_sort(arr: &mut [f64]) {
@@ -30,4 +30,5 @@ pub fn main_js() {
 
     bubble_sort(&mut numbers);
     // display(&mut numbers);
+    log(numbers[0]);
 }

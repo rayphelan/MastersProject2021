@@ -9,6 +9,7 @@
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
+ (type $none_=>_f64 (func (result f64)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (global $assembly/index/arraySize i32 (i32.const 100000))
@@ -3861,9 +3862,6 @@
   local.get $2
   call $~lib/array/Array<f64>#__uset
  )
- (func $assembly/index/selectionSort
-  call $assembly/index/sSort
- )
  (func $~lib/rt/__visit_globals (param $0 i32)
   (local $1 i32)
   global.get $assembly/index/array
@@ -4080,5 +4078,32 @@
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
+ )
+ (func $assembly/index/selectionSort (result f64)
+  (local $0 i32)
+  (local $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  call $assembly/index/sSort
+  global.get $assembly/index/array
+  local.set $0
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  i32.const 0
+  call $~lib/array/Array<f64>#__get
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
  )
 )

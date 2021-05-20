@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
-// #[wasm_bindgen]
-// extern "C" {
-//     #[wasm_bindgen(js_namespace = console)]
-//     fn log(s: String);
-// }
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: f64);
+}
 
 pub fn selection_sort_recursive(param_int_array:&mut [f64]) {
     selection_sort_recursive_process(param_int_array, 0);
@@ -49,4 +49,5 @@ pub fn main_js() {
 
     selection_sort_recursive(&mut numbers);
     // display(&mut numbers);
+    log(numbers[0]);
 }
