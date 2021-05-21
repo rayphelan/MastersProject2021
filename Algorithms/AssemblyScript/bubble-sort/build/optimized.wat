@@ -2222,7 +2222,7 @@
   global.set $~lib/memory/__stack_pointer
   local.get $0
   i32.store
-  i32.const 3
+  i32.const 99998
   local.set $2
   loop $for-loop|0
    local.get $2

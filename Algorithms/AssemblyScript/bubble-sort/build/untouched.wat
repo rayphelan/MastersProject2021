@@ -4066,7 +4066,7 @@
   call $~lib/rt/__newArray
   local.tee $1
   i32.store
-  i32.const 5
+  i32.const 100000
   i32.const 2
   i32.sub
   local.set $0
