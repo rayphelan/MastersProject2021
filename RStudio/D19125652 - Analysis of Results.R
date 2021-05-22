@@ -194,9 +194,9 @@ wilcox.test(C$Fibonacci,CPP$Fibonacci)                      # W = 8162,   p-valu
 wilcox.test(C$Fibonacci,Rust$Fibonacci)                     # W = 12296,  p-value < 2.2e-16
 
 # HeapSort
-wilcox.test(C$BinarySearch,AssemblyScript$BinarySearch)     # W = 1818,   p-value < 2.2e-16
-wilcox.test(C$BinarySearch,CPP$BinarySearch)                # W = 6410,   p-value = 0.1421    ***
-wilcox.test(C$BinarySearch,Rust$BinarySearch)               # W = 10409,  p-value = 2.427e-09
+wilcox.test(C$HeapSort,AssemblyScript$HeapSort)             # W = 0,      p-value < 2.2e-16
+wilcox.test(C$HeapSort,CPP$HeapSort)                        # W = 7423,   p-value = 0.6791    ***
+wilcox.test(C$HeapSort,Rust$HeapSort)                       # W = 3206,   p-value = 1.119e-13
 
 # LinearSearch
 wilcox.test(C$LinearSearch,AssemblyScript$LinearSearch)     # W = 0,      p-value < 2.2e-16
@@ -316,7 +316,7 @@ wilcox.test(CPP$LinearSearch,Rust$LinearSearch)                   # W = 14280,  
 
 # MergeSort
 wilcox.test(CPP$MergeSort,AssemblyScript$MergeSort)               # W = 0,      p-value < 2.2e-16
-wilcox.test(CPP$MergeSort,C$MergeSort)                            # W = 7466,   p-value = 0.6215
+wilcox.test(CPP$MergeSort,C$MergeSort)                            # W = 7466,   p-value = 0.6215    ***
 wilcox.test(CPP$MergeSort,Rust$MergeSort)                         # W = 0,      p-value < 2.2e-16
 
 # NQueen24
@@ -341,7 +341,7 @@ wilcox.test(CPP$SelectionSort,Rust$SelectionSort)                 # W = 0,      
 
 # ShellSort
 wilcox.test(CPP$ShellSort,AssemblyScript$ShellSort)               # W = 0,      p-value < 2.2e-16
-wilcox.test(CPP$ShellSort,C$ShellSort)                            # W = 7646,   p-value = 0.4074
+wilcox.test(CPP$ShellSort,C$ShellSort)                            # W = 7646,   p-value = 0.4074    ***
 wilcox.test(CPP$ShellSort,Rust$ShellSort)                         # W = 565,    p-value < 2.2e-16
 
 
