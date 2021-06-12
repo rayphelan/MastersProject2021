@@ -85,3 +85,7 @@ fs.writeFile('results.csv', csv, function (err) {
 ```
 npm experiment/index.js
 ```
+
+### Results
+
+The results will be saved in the current directory in CSV format.
