@@ -1,0 +1,11 @@
+@article{Zhang2019,
+abstract = {Serverless computing has gained attention due to its fine-grained provisioning, large-scale multi-Tenancy, and on-demand scaling. However, it also forces applications to externalize state in remote storage, adding substantial overheads. To fix this "data shipping problem"we built Shredder, a low-latency multi-Tenant cloud store that allows small units of computation to be performed directly within storage nodes. Storage tenants provide Shredder with JavaScript functions (or WebAssembly programs), which can interact directly with data without moving them over the network. The key challenge in Shredder is safely isolating thousands of tenant storage functions while minimizing data interaction costs. Shredder uses a unique approach where its data store and networking paths are implemented in native code to ensure performance, while isolated tenant functions interact with data using a V8-specific intermediate representation that avoids expensive cross-protection-domain calls and data copying. As a result, Shredder can execute 4 million remotely-invoked tenant functions per second spread over thousands of tenants with median and 99th-percentile response latencies of less than 50 µs and 500 µs, respectively. Our evaluation shows that Shredder achieves a 14% to 78% speedup against conventional remote storage when fetching items with just one to three data dependencies between them. We also demonstrate Shredder's effectiveness in accelerating data-intensive applications, including a k-hop query on social graphs that shows orders of magnitude gain.},
+author = {Zhang, Tian and Xie, Dong and Li, Feifei and Stutsman, Ryan},
+doi = {10.1145/3357223.3362723},
+file = {:C\:/Users/ray.phelan/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Zhang et al. - 2019 - Narrowing the Gap between Serverless and its State with Storage Functions.pdf:pdf},
+isbn = {9781450369732},
+journal = {SoCC 2019 - Proceedings of the ACM Symposium on Cloud Computing},
+pages = {1--12},
+title = {{Narrowing the Gap between Serverless and its State with Storage Functions}},
+year = {2019}
+}
