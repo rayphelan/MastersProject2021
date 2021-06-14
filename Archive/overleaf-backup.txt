@@ -75,7 +75,7 @@
         \vfill
        \large
         A dissertation submitted in partial fulfilment of the requirements of\\
-	Dublin Institute of Technology for the degree of\\
+	Technical University Dublin for the degree of\\
 	M.Sc. in Computing (TU060)\\
        \vspace{0.5cm}
         \textbf{Date: June 14, 2021}
@@ -106,7 +106,7 @@ acknowledged within the text of my work.
 \\
 \\
 This dissertation was prepared according to the regulations for postgraduate study of
-the Dublin Institute of Technology and has not been submitted in whole or part for an
+the Technical University Dublin and has not been submitted in whole or part for an
 award in any other Institute or University.
 \\
 \\
@@ -189,13 +189,14 @@ Finally, I would like to thank my classmates that I have had the pleasure of get
 \chapter{Introduction}
 \section{Background}
 
-WebAssembly, also known as WASM, is a new technology revolutionizing the web. It is a low-level binary instruction set, similar to pure assembly language, designed to run at near-native speeds otherwise only achieved with C/C++ code. It can be run on the client-side in web-browsers, on the server-side with NodeJS, and even as a stand-alone environment beyond the web, known as WASI (WebAssembly System Interface), \parencite[]{noauthor_wasi_nodate, noauthor_standardizing_nodate, noauthor_bytecodealliancewasmtime_2021}.
+WebAssembly, also known as WASM, is a new technology revolutionizing the web. It is a low-level binary instruction set, similar to pure assembly language, designed to run at near-native speeds otherwise only achieved with C/C++ code. It can be run on the client-side in web-browsers, on the server-side with NodeJS, and even as a stand-alone environment beyond the web, known as WASI (WebAssembly System Interface) \footnote{https://wasi.dev/}.
 
 WebAssembly was first announced on December 5th, 2019, by the World Wide Web Consortium (W3C). For many years, JavaScript has been the only option for providing interactive applications in websites \parencite{Musch2019}, although there have been many attempts to remedy this, for example Adobe Flash and Microsoft Active-X. However, these needed to be installed as browser extensions which prevented them from large scale acceptance. WebAssembly on the other hand, requires no extensions to be installed and is already supported by all of the major web-browsers.
 
-Programs written in statically typed languages, such as C, C++, and Rust can now be compiled into WebAssembly. As JavaScript is a dynamically typed language, it cannot be directly compiled into WebAssembly. TypeScript however, a subset of the JavaScript language, can be compiled into WebAssembly. Many other programming languages are currently working towards enabling compilation to WebAssembly \parencite{appcypher_appcypherawesome-wasm-langs_2021}. This opens the door for many new possibilities as developers from these languages can now develop for the web, where previously this was not possible.
+Programs written in statically typed languages, such as C, C++, and Rust can now be compiled into WebAssembly. As JavaScript is a dynamically typed language, it cannot be directly compiled into WebAssembly. TypeScript however, a subset of the JavaScript language, can be compiled into WebAssembly. Many other programming languages are currently working towards enabling compilation to WebAssembly and are currently listed here \footnote{https://github.com/appcypher/
+awesome-wasm-langs}. This opens the door for many new possibilities as developers from these languages can now develop for the web, where previously this was not possible.
 
-As WebAssembly is essentially binary code, this cannot be easily understood by human readers. There is however a textual representation of WebAssembly, known as WAT (WebAssembly Text Format), \parencite{noauthor_wat_nodate}. There are tools available for converting pure WebAssembly binary code into WAT format and vice-versa, such as the WABT tool \parencite{noauthor_webassemblywabt_2021}. C and C++ can be compiled to WebAssembly using the Emscripten compiler \parencite{emscripten} and Rust can be compiled using the wasm-pack compiler \parencite{noauthor_wasm-pack_nodate}. AssemblyScript \parencite{noauthor_assemblyscript_nodate} is a variant of TypeScript which can compile directly to WebAssembly. These compilers will be the focus of this research project.
+As WebAssembly is essentially binary code, this cannot be easily understood by human readers. There is however a textual representation of WebAssembly, known as WAT (WebAssembly Text Format)\footnote{https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format}. There are tools available for converting pure WebAssembly binary code into WAT format and vice-versa, such as the WABT tool\footnote{https://github.com/WebAssembly/wabt}. C and C++ can be compiled to WebAssembly using the Emscripten\footnote{https://emscripten.org/} compiler and Rust can be compiled using the wasm-pack\footnote{https://rustwasm.github.io/wasm-pack/installer/} compiler. AssemblyScript\footnote{https://www.assemblyscript.org/} is a variant of TypeScript which can compile directly to WebAssembly. These compilers will be the focus of this research project.
 
 \section{Research Project/problem}
 
@@ -262,21 +263,21 @@ In this section, we will review currently available literature that carried out 
 
 \Textcite{Sandhu2020} compared WebAssembly to native C code, again using sparse matrix computations. However, they developed the WebAssembly implementations by hand rather then using a compiler. This time they discover that WebAssembly executed in the Chrome browser has performance issues due to memory addressing in the x86 instruction set. Ultimately, this leaves a gap in the research, as perhaps it would be important to understand if various WebAssembly compilers might have produced more efficient WebAssembly code than the hand-written implementation.
 
-\Textcite{234914} use the PolybenchC Benchmark Suite \parencite{noauthor_polybenchc_nodate} to compare WebAssembly-compiled Unix applications versus native speeds inside the browser. Their findings revealed that WebAssembly ran up to 55\% slower. However, the WebAssembly modules that were used in their experiments were generated from the Emscripten compiler only, so once again we do not know if WebAssembly from other compilers might result in different performances.
+\Textcite{234914} use the PolybenchC Benchmark Suite\footnote{http://web.cs.ucla.edu/~pouchet/software/polybench/} to compare WebAssembly compiled Unix applications versus native speeds inside the browser. Their findings revealed that WebAssembly ran up to 55\% slower. However, the WebAssembly modules that were used in their experiments were generated from the Emscripten compiler only, so once again we do not know if WebAssembly from other compilers might result in different performances.
 
-\Textcite{Haas2017} also compared the performance of WebAssembly using the PolybenchC Benchmark Suite on browser JavaScript engines, such as Mozilla SpiderMonkey, Google V8 and Microsoft Chakra. The generation of WebAssembly modules was done with the assistance of the OCaml Programming Language \parencite{noauthor_ocaml_nodate}, rather than using any compiler. Once again, there was no evaluation of the WebAssembly code in comparison to what other compilers would generate by implementing different programming languages.
+\Textcite{Haas2017} also compared the performance of WebAssembly using the PolybenchC Benchmark Suite on browser JavaScript engines, such as Mozilla SpiderMonkey, Google V8 and Microsoft Chakra. The generation of WebAssembly modules was done with the assistance of the OCaml Programming Language\footnote{https://ocaml.org/manual/coreexamples.html}, rather than using any compiler. Once again, there was no evaluation of the WebAssembly code in comparison to what other compilers would generate by implementing different programming languages.
 
 \Textcite{Herrera2018} evaluate the performance of JavaScript and WebAssembly compared to native C code. They used five of the benchmarks identified in the Ostrich Benchmark Suite \parencite{Khan2015} for numerical computing, and compiled them into WebAssembly modules using Emscripten. Their comparisons were done between web browsers, IoT devices and NodeJS. Their findings once again show that WebAssembly comes close to native C performance, but is faster than JavaScript. However, these experiments also were limited by only evaluating the WebAssembly generated from one compiler, rather than multiple compilers.
 
 \Textcite{Reiser2017} presented their own WebAssembly compiler, Speedy.js, which compiles JavaScript/TypeScript to WebAssembly, although their compiler uses the Emscripten runtime library. They use a number of computing algorithms, such as Fibonacci, Prime Number and Merge Sort, to evaluate the performance of TypeScript compared to the WebAssembly implementation generated by their proposed solution. Indeed they find WebAssembly performance to be faster than plain TypeScript, however only the WebAssembly from their compiler was evaluated, rather than including WebAssembly generated by other compilers.
 
-\Textcite{Protzenko2019} also present their own compiler, which compiles Low*, a low-level subset of F* programming language, into WebAssembly. They develop an alternative to the JavaScript encryption library, LibSignal \parencite{noauthor_signalapplibsignal-protocol-javascript_2021}, which is used in many modern services such as WhatsApp, Skype and Signal for managing end-to-end encryption. They report no speed up between WebAssembly and the JavaScript library, mainly due to overhead between encoding and decoding between WebAssembly and JavaScript. They suggest that future JavaScript libraries should be designed to be more WebAssembly friendly. However, only WebAssembly modules generated from their own compiler were used in this evaluation, therefore it is unknown if other WebAssembly compilers might have produced more efficient WebAssembly code.
+\Textcite{Protzenko2019} also present their own compiler, which compiles Low*, a low-level subset of F* programming language, into WebAssembly. They develop an alternative to the JavaScript encryption library, LibSignal\footnote{https://github.com/signalapp/libsignal-protocol-javascript}, which is used in many modern services such as WhatsApp, Skype and Signal for managing end-to-end encryption. They report no speed up between WebAssembly and the JavaScript library, mainly due to overhead between encoding and decoding between WebAssembly and JavaScript. They suggest that future JavaScript libraries should be designed to be more WebAssembly friendly. However, only WebAssembly modules generated from their own compiler were used in this evaluation, therefore it is unknown if other WebAssembly compilers might have produced more efficient WebAssembly code.
 
 \Textcite{Watt2019} propose a similar solution to cryptography using WebAssembly, rather than JavaScript. However, they use a different approach, proposing CT-WASM as an extension to WebAssembly, or as a new programming language that is similar to TypeScript, which includes its own compiler for generating pure WebAssembly modules. However, the performance of their generated WebAssembly modules is not evaluated against WebAssembly modules generated from other compilers.
 
 \Textcite{Mendki2020} proposed a WebAssembly Serverless Edge Computing as an alternative to the native container-based application. They developed a compute and memory intensive application with file I/O and image classification using Rust and compiled it into WebAssembly. They found that WebAssembly had a lower footprint than the container-based solution while also showing faster start-up times, but the runtimes were slower than the native container application. However, only WebAssembly compiled from Rust was evaluated in their proposal, therefore it is unknown how well WebAssembly compiled from other languages might have performed.
 
-A WebAssembly solution to the stateless containers used by existing serverless platforms was published in \parencite{Shillaker2020}, providing isolated memory and CPU (Computer Processing Unit), with state sharing capabilities. Their solution used the LLVM compiler \parencite{noauthor_llvm_nodate} to translate applications into WebAssembly from multiple programming languages such as, C, C++, Python, JavaScript and TypeScript. Their evaluation reported a 2x performance speed-up with 10x less memory consumption using their proposal against dockerised containers. However, they also only used the one compiler for the generation of WebAssembly modules in their evaluations.
+A WebAssembly solution to the stateless containers used by existing serverless platforms was published in \parencite{Shillaker2020}, providing isolated memory and CPU (Computer Processing Unit), with state sharing capabilities. Their solution used the LLVM compiler\footnote{https://llvm.org/} to translate applications into WebAssembly from multiple programming languages such as, C, C++, Python, JavaScript and TypeScript. Their evaluation reported a 2x performance speed-up with 10x less memory consumption using their proposal against dockerised containers. However, they also only used the one compiler for the generation of WebAssembly modules in their evaluations.
 
 \Textcite{Jeong2019} proposed an edge computing framework for offloading JavaScript and WebAssembly state between mobile devices, edge computing devices and cloud services. This system saves the state of JavaScript workers, objects and WebAssembly functions, and enables the transfer and restoration of these between devices, resulting in an 8.4x speedup compared with only offloading pure JavaScript code. All the WebAssembly files used in their experiments were generated from C++ code using the Emscripten compiler. Once again, this highlights the gap of knowing how WebAssembly from other compilers would have performed in these experiments.
 
@@ -288,7 +289,7 @@ WebAssembly was proposed in \parencite{Long2021} as a lightweight alternative fo
 
 \Textcite{Tiwary2020} proposed an alternative to container-based serverless computing, addressing their cold-start problems and complicated architectures, while providing stateful memory and multi-tenancy isolation. Their proposal suggests WebAssembly to be executed directly on ring 0 with the serverless functions placed as close to the data as possible, providing CPU memory and filesystem isolation that is required for multi-tenancy in cloud computing. Their proposal was developed in Rust and compiled into WebAssembly using the Rust WebAssembly compiler, therefore once again, performance of WebAssembly is based on the code generated from a single WebAssembly compiler.
 
-\parencite{DBLP:journals/corr/abs-2012-01032} evaluate the performance of Ethereum blockchain smart contracts using WebAssembly. They implement 12 benchmarks in Rust and compile to WebAssembly. They also use the emerging compiler SOLL \parencite{noauthor_second-statesoll_2021} that generates WebAssembly bytecode from Solidity \parencite{team_solidity_nodate}. Their experiments compare the performance of the WebAssembly driven blockchain against the EVM (Ethereum Virtual Machine) implementation, finding that WebAssembly driven blockchain does not perform as well as the EVM. However, they did not use the full range of available WebAssembly compilers by implementing their benchmarks in other programming languages, which perhaps might have produced different results for the evaluation of WebAssembly.
+\parencite{DBLP:journals/corr/abs-2012-01032} evaluate the performance of Ethereum blockchain smart contracts using WebAssembly. They implement 12 benchmarks in Rust and compile to WebAssembly. They also use the emerging compiler SOLL\footnote{https://github.com/second-state/SOLL} that generates WebAssembly bytecode from Solidity\footnote{https://soliditylang.org/}. Their experiments compare the performance of the WebAssembly driven blockchain against the EVM (Ethereum Virtual Machine) implementation, finding that WebAssembly driven blockchain does not perform as well as the EVM. However, they did not use the full range of available WebAssembly compilers by implementing their benchmarks in other programming languages, which perhaps might have produced different results for the evaluation of WebAssembly.
 
 FAUST is a domain specific functional programming language used in audio processing and sound synthesis for applications such as synthesizers, musical instruments and sound effects used in concerts, artistic productions, education and research. \Textcite{Letz2018} propose an alternative by compiling FAUST into WebAssembly and performing benchmarks to compare the performance of WebAssembly with native versions. They found that WebAssembly ran up to 66\% slower than native C++ versions. Interestingly, they question the code quality that will eventually be generated by multiple WebAssembly compilers. However, their experiments only involved the WebAssembly modules generated by the Emscripten compiler.
 
@@ -303,9 +304,7 @@ In this section we discussed some of the available literature that evaluated the
 % ============================================================= %
 \chapter{Experiment design and methodology}
 
-The entire source code and results of our experiments are publicly available on a GitHub repository and can be located at: 
-
-https://github.com/rayphelan/MastersProject2021 \\
+The entire source code and results of our experiments are publicly available on a GitHub Repository\footnote{https://github.com/rayphelan/MastersProject2021}.
 
 After installing the WebAssembly compilers for each of the selected languages and their required dependencies, this experiment can be fully reproduced by cloning the Git repository on a local VM and following the steps provided on the Github repository and in this paper.
 
@@ -365,19 +364,19 @@ The following section provides details on the software that was required. This i
 
 \subsubsection{Emscripten}
 
-Emscripten \parencite{emscripten} is the compiler used to generate the WebAssembly files from C/C++ code. Installing Emscripten has a number of prerequisites, such as GIT \parencite{git}, NodeJS (Version 15.14.0) \parencite{nodejs_nodejs_nodate} and Python3 \parencite{python} and the GCC Compiler for C and C++ \parencite{noauthor_gcc_nodate}.
+Emscripten\footnote{https://emscripten.org/} is the compiler used to generate the WebAssembly files from C/C++ code. Installing Emscripten has a number of prerequisites, such as GIT\footnote{https://git-scm.com/}, NodeJS (Version 15.14.0)\footnote{https://nodejs.org/en/} and Python3\footnote{https://www.python.org/downloads/} and the GCC Compiler\footnote{https://gcc.gnu.org/} for C and C++.
 
 \subsubsection{Rust}
 
-Rust was downloaded and installed from \parencite{rust} and the documentation for setting up the Rust to WebAssemby compiler, wasm-pack \parencite{noauthor_wasm-pack_nodate}, was found at \parencite{rust_webassembly}.
+Rust was downloaded and installed from here\footnote{https://www.rust-lang.org/} and the documentation for setting up the Rust to WebAssemby compiler, wasm-pack\footnote{https://rustwasm.github.io/wasm-pack/installer/} was found at here\footnote{https://rustwasm.github.io/docs/book/}.
 
 \subsubsection{AssemblyScript}
 
-Documentation for setting up the AssemblyScript WebAssembly compiler can be found at \parencite{noauthor_assemblyscript_nodate}.
+Documentation for setting up the AssemblyScript WebAssembly compiler can be found here\footnote{https://www.assemblyscript.org/}.
 
 \subsubsection{RStudio}
 
-RStudio \parencite{noauthor_rstudio_nodate} was used to perform the statistical analysis of our results.
+RStudio\footnote{https://rstudio.com/} was used to perform the statistical analysis of our results.
 
 \section{Algorithms}
 
@@ -385,7 +384,7 @@ The algorithms used in our experiments were first sourced on the internet as C/C
 
 In our experiments, some of the algorithms were given an array of 100,000 elements as their input. A JavaScript program was created which generated 3 versions of an array with 100,000 elements. Each element is a unique floating point number with 7 decimal places. The first version is a sorted array with 100,000 elements. The second version is the same array in reserve order. The third version is the array with the elements in random positions. The respective array for each experiment was copied directly into the algorithms as their input parameters and the same array was provided to all algorithms which required an array as the input parameter.
 
-The selection of algorithms used in this research were influenced by other research papers that previously used these algorithms. The NQueens algorithm has been used in papers such as \parencite{Herrera2018} and \parencite{Khan2015}. Recursive functions, such as the Fibonacci algorithm, are used in the following benchmarking paper \parencite{VanEekelen2019}. \Textcite{Reiser2017} used a number of algorithms for their benchmarks, including the Prime Numbers, Merge Sort and Fibonacci algorithms. The Bubble Sort, Merge Sort, Fibonacci, NQueens, Prime Number were also used in previous versions of the Ostrich Benchmarking Suite \parencite{noauthor_sableostrich2_nodate}.
+The selection of algorithms used in this research were influenced by other research papers that previously used these algorithms. The NQueens algorithm has been used in papers such as \parencite{Herrera2018} and \parencite{Khan2015}. Recursive functions, such as the Fibonacci algorithm, are used in the following benchmarking paper \parencite{VanEekelen2019}. \Textcite{Reiser2017} used a number of algorithms for their benchmarks, including the Prime Numbers, Merge Sort and Fibonacci algorithms. The Bubble Sort, Merge Sort, Fibonacci, NQueens, Prime Number were also used in previous versions of the Ostrich Benchmarking Suite\footnote{https://github.com/Sable/Ostrich2}.
 
 \subsection{Numerical Computing Algorithms}
 
@@ -393,17 +392,17 @@ The numerical computing algorithms used in our experiments are NQueens, Primary 
 
 \subsubsection{NQueens}
 
-The 8 Queens Puzzle was originally published in 1848 \parencite{noauthor_eight_2021}. The objective is to place 8 Chess Queens on an 8x8 chess board in such a manor that no Queens are in direct threat from each other. Given the complexity of this puzzle when used with larger board sizes, it has been used many times as a software algorithm for benchmarking, known as the NQueens back-tracking algorithm. 
+The 8 Queens Puzzle\footnote{https://en.wikipedia.org/w/index.php?title=Eight_queens_puzzle&oldid=1022941393} was originally published in 1848. The objective is to place 8 Chess Queens on an 8x8 chess board in such a manor that no Queens are in direct threat from each other. Given the complexity of this puzzle when used with larger board sizes, it has been used many times as a software algorithm for benchmarking, known as the NQueens back-tracking algorithm. 
 
-The NQueens algorithm is part the Ostrich Benchmark Suite \parencite{ostrich} developed at the Sable Lab at McGill University. It has been a popular research topic in computer science research for many years \parencite[]{Guldal2016, Ayub2018, Alhassan2019}.
+The NQueens algorithm is part the Ostrich Benchmark Suite\footnote{http://www.sable.mcgill.ca/mclab/projects/ostrich/} developed at the Sable Lab at McGill University. It has been a popular research topic in computer science research for many years \parencite[]{Guldal2016, Ayub2018, Alhassan2019}.
 
 In our experiments, we implemented two versions of the NQueens algorithm. The first using a board of 24x24, the second using a board of 27x27. The reason we chose the 24x24 size was that it provided enough complexity between all the selected programming languages in order to return a benchmarked time other than micro-seconds. The reason we did not go beyond the 27x27 size is because AssemblyScript was already taking considerably longer than the other programming languages the larger the board size became. The algorithm was implemented in all of the selected programming languages keeping the same code structure as much as possible. The output of the algorithms was the printed solution of the board.
 
-The C/C++ version of this algorithm was sourced at \parencite{nqueens_code}. The NQueens algorithm has a complexity of $O({n}^{n})$.
+The C/C++ version of this algorithm was sourced online\footnote{https://www.geeksforgeeks.org/c-program-for-n-queen-problem-backtracking-3/}. The NQueens algorithm has a complexity of $O({n}^{n})$.
 
 \subsubsection{Prime Number}
 
-An important topic in computer science and cryptography is Number Theory, where the Prime Number calculation plays an important role \parencite{ElhakeemAbdElnaby2021}. A Prime Number is a number that has only two factors, 1 and the number itself. In this experiment, the Prime Numbers algorithm will calculate every prime number from 2 until 100,000. The output will print the 100,000th prime number. The C/C++ version of this algorithm was sourced at \parencite{primenumber} and the code for the other selected languages was written from scratch. The Prime Numbers algorithm has a complexity of $O(\sqrt{}(n))$.
+An important topic in computer science and cryptography is Number Theory, where the Prime Number calculation plays an important role \parencite{ElhakeemAbdElnaby2021}. A Prime Number is a number that has only two factors, 1 and the number itself. In this experiment, the Prime Numbers algorithm will calculate every prime number from 2 until 100,000. The output will print the 100,000th prime number. The C/C++ version of this algorithm was sourced online\footnote{https://www.csinfo360.com/2020/01/write-program-to-find-nth-prime-number.html} and the code for the other selected languages was written from scratch. The Prime Numbers algorithm has a complexity of $O(\sqrt{}(n))$.
 
 \subsubsection{Fibonacci}
 
@@ -416,24 +415,24 @@ Sorting plays a crucial role in many algorithms \parencite{Abhay2019}. The sorti
 
 \subsubsection{Bubble Sort}
 
-The Bubble Sort algorithm compares two adjacent elements and swaps them around if they are not in the required order. The C/C++ version of this algorithm was sourced at \parencite{bubblesort} and the algorithms were written in the other languages from scratch. The Bubble Sort algorithm has a complexity of $O(n2)$.
+The Bubble Sort algorithm compares two adjacent elements and swaps them around if they are not in the required order. The C/C++ version of this algorithm was sourced online\footnote{https://www.programiz.com/dsa/bubble-sort} and the algorithms were written in the other languages from scratch. The Bubble Sort algorithm has a complexity of $O(n2)$.
 
 
 \subsubsection{Heap Sort}
 
-The Heap Sort algorithm is generally slower than other sorting algorithms and therefore not commonly used, however we wanted to include this inefficient sorting algorithm in our experiments as we believe it still provides interesting insights. The C/C++ version of this algorithm was sourced at \parencite{heapsort} and the algorithms were written in the other languages from scratch. The Heap Sort algorithm has a complexity of $O(n\log{}n)$.
+The Heap Sort algorithm is generally slower than other sorting algorithms and therefore not commonly used, however we wanted to include this inefficient sorting algorithm in our experiments as we believe it still provides interesting insights. The C/C++ version of this algorithm was sourced online\footnote{https://www.programiz.com/dsa/heap-sort} and the algorithms were written in the other languages from scratch. The Heap Sort algorithm has a complexity of $O(n\log{}n)$.
 
 \subsubsection{Merge Sort}
 
-The Merge Sort algorithm follows the principle of Divide and Conquer. It works by dividing the problem into multiple sub-problems, solving each of the smaller sub-problems, and merging the results back together to generate the output. The C/C++ versions of this algorithm was sourced at \parencite{mergesort} and the algorithms were written in the other languages from scratch. The Merge Sort algorithm has a complexity of $O(n*\log{}n)$.
+The Merge Sort algorithm follows the principle of Divide and Conquer. It works by dividing the problem into multiple sub-problems, solving each of the smaller sub-problems, and merging the results back together to generate the output. The C/C++ versions of this algorithm was sourced online\footnote{https://www.programiz.com/dsa/merge-sort} and the algorithms were written in the other languages from scratch. The Merge Sort algorithm has a complexity of $O(n*\log{}n)$.
 
 \subsubsection{Selection Sort}
 
-The Selection Sort algorithm selects the smallest element from an array and places it at the beginning. It repeats this process until the results represent a sorted array. The C/C++ version of this algorithm was sourced at \parencite{selectionsort} and the algorithms were written in the other languages from scratch. The Selection Sort algorithm has a complexity of $O(n2)$.
+The Selection Sort algorithm selects the smallest element from an array and places it at the beginning. It repeats this process until the results represent a sorted array. The C/C++ version of this algorithm was sourced online\footnote{https://www.programiz.com/dsa/selection-sort} and the algorithms were written in the other languages from scratch. The Selection Sort algorithm has a complexity of $O(n2)$.
 
 \subsubsection{Shell Sort}
 
-The Shell Sort algorithm sorts elements at different intervals, starting from the elements that are furthest apart from each other and repeating the process until all the elements are in a sorted order. The C/C++ version of this algorithm was sourced at \parencite{shellsort} and the algorithms were written in the other languages from scratch. The Shell Sort algorithm has a complexity of $O(n2)$.
+The Shell Sort algorithm sorts elements at different intervals, starting from the elements that are furthest apart from each other and repeating the process until all the elements are in a sorted order. The C/C++ version of this algorithm was sourced online\footnote{https://www.programiz.com/dsa/shell-sort} and the algorithms were written in the other languages from scratch. The Shell Sort algorithm has a complexity of $O(n2)$.
 
 
 \subsection{Searching Algorithms}
@@ -442,11 +441,11 @@ The most commonly known searching algorithms are the Binary Search and Linear Se
 
 \subsubsection{Binary Search}
 
-The Binary Search algorithm assumes that the given array will in a sorted order. Given a sorted array, the algorithm divides the array in half by selecting the middle element of the array. It determines if the number being searched for is greater or less than the value of the middle element. This means that one half of the array can be ignored as the number being searched for must be in the other half. This process is repeated recursively until the number being searched for is found. The C/C++ code for this algorithm was sourced at \parencite{binarysearch}  and the algorithms were written in the other languages from scratch. The Binary Search has a complexity of $O(\log{}n)$.
+The Binary Search algorithm assumes that the given array will in a sorted order. Given a sorted array, the algorithm divides the array in half by selecting the middle element of the array. It determines if the number being searched for is greater or less than the value of the middle element. This means that one half of the array can be ignored as the number being searched for must be in the other half. This process is repeated recursively until the number being searched for is found. The C/C++ code for this algorithm was sourced online\footnote{https://www.programiz.com/dsa/binary-search}  and the algorithms were written in the other languages from scratch. The Binary Search has a complexity of $O(\log{}n)$.
 
 \subsubsection{Linear Search}
 
-The Linear Search algorithm does not require a sorted array. In this experiment, the Linear Search algorithm was given an array of 100,000 elements of unique floating point numbers between 0 and 99,999 with 7 decimal places and the array has been given a random ordering. The algorithm performs a simple search on every element in the array, starting from the first element and finishing when the number being searched for is found, which could go all the way to the last element. The C/C++ code for this algorithm was sourced at \parencite{linearsearch} and the algorithms were written in the other languages from scratch. The Linear Search has a complexity of $O({}n)$.
+The Linear Search algorithm does not require a sorted array. In this experiment, the Linear Search algorithm was given an array of 100,000 elements of unique floating point numbers between 0 and 99,999 with 7 decimal places and the array has been given a random ordering. The algorithm performs a simple search on every element in the array, starting from the first element and finishing when the number being searched for is found, which could go all the way to the last element. The C/C++ code for this algorithm was sourced online\footnote{https://www.programiz.com/dsa/linear-search} and the algorithms were written in the other languages from scratch. The Linear Search has a complexity of $O({}n)$.
 
 \section{Compiling to WebAssembly}
 
@@ -483,7 +482,7 @@ emcc binarySearch.c -o binarySearch.js -O2
 
 \subsection{AssemblyScript to WebAssembly}
 
-AssemblyScript was designed specifically to target WebAssembly while offering a familiar syntax for TypeScript and JavaScript developers. It uses Node Package Manager (NPM) \parencite{noauthor_npm_nodate} as the installer. We created a new NPM application for each algorithm. Instructions for setting up new NPM applications are detailed on our Github repository. The AssemblyScript compiler also comes with options for optimization. For our experiments we used the optimization level 3, for speed rather than code size, like we did with the Emscripten optimization levels. However, these optimization levels are actually applied by default, but can be altered in the configuration files of the compiler. The following code in listing \ref{lst:ASOpt} show how the WebAssembly and JavaScript files were generated using AssemblyScript.
+AssemblyScript was designed specifically to target WebAssembly while offering a familiar syntax for TypeScript and JavaScript developers. It uses Node Package Manager\footnote{https://www.npmjs.com/} (NPM) as the installer. We created a new NPM application for each algorithm. Instructions for setting up new NPM applications are detailed on our Github Repository. The AssemblyScript compiler also comes with options for optimization. For our experiments we used the optimization level 3, for speed rather than code size, like we did with the Emscripten optimization levels. However, these optimization levels are actually applied by default, but can be altered in the configuration files of the compiler. The following code in listing \ref{lst:ASOpt} show how the WebAssembly and JavaScript files were generated using AssemblyScript.
 
 \begin{lstlisting}[caption={AssemblyScript Optimization},label={lst:ASOpt},language=AssemblyScript,basicstyle=\scriptsize,style=myStyle]
 npm run asbuild
@@ -491,7 +490,7 @@ npm run asbuild
 
 \subsection{Rust to WebAssembly}
 
-To compile Rust to WebAssembly, the wasm-pack compiler was used. Instructions for creating new wasm-pack applications can be found on our Github repository. We created a new wasm-pack application for each of our selected algorithms. Once inside the directory of the wasm-pack application created for each algorithm, the WebAssembly modules can be compiled.
+To compile Rust to WebAssembly, the wasm-pack compiler was used. Instructions for creating new wasm-pack applications can be found on our Github Repository. We created a new wasm-pack application for each of our selected algorithms. Once inside the directory of the wasm-pack application created for each algorithm, the WebAssembly modules can be compiled.
 
 We passed an option to the compiler to note that we were targetting the NodeJS environment. This customizes the JavaScript glue file so it can be easily run in NodeJS. Wasm-pack allows us to specify whether or not the build should be optimized for production, using the --release keyword. However if no keyword is provided, the --release profile is automatically used. This was the optimization levels used in our experiments. The following code in listing \ref{lst:wasmpack} shows how the WebAssembly and JavaScript files were generated for Rust.
 
@@ -503,11 +502,14 @@ wasm-pack build --target nodejs
 
 \section{Benchmarking and Gathering Results}
 
-WebAssembly modules are most commonly loaded via its JavaScript API \parencite{Hall2019}. The WebAssembly compilers used in our experiments generate the boilerplate JavaScript glue which can then be be converted into a JavaScript module, allowing it to be conveniently imported into other JavaScript functions. Inspired by the Ostrich Benchmark Suite \parencite{ostrich} which created a python runner script for executing the benchmarks and recording the results, we created our own JavaScript runner which runs our experiments in NodeJS with the desired number of iterations and records the final results onto a CSV (Comma Separated Values) file for post processing.
+WebAssembly modules are most commonly loaded via its JavaScript API \parencite{Hall2019}. The WebAssembly compilers used in our experiments generate the boilerplate JavaScript glue which can then be be converted into a JavaScript module, allowing it to be conveniently imported into other JavaScript functions. Inspired by the Ostrich Benchmark Suite which created a python runner script for executing the benchmarks and recording the results, we created our own JavaScript runner which runs our experiments in NodeJS with the desired number of iterations and records the final results onto a CSV (Comma Separated Values) file for post processing.
 
 Each compiler generates the WASM file and the JavaScript glue for loading and interacting with the WASM file. For each algorithm in each language, we created a new JavaScript runner which loads the JavaScript Glue file. The JavaScript runner was manually invoked using NodeJS command line for each algorithm in each programming language.  Once the WebAssembly module has been loaded, the JavaScript runner executes a loop which runs the main function in the corresponding WebAssembly module. The number of iterations in the loop depends on how many times we want to perform the experiment. After each iteration, the execution time in nanoseconds is measured and converted into seconds and milliseconds before being saved to an array of results. After the final iteration, the array is saved into a CSV file. Note that the time for loading the WebAssembly module is not being measured, since we are only interested in the execution time. 
 
-The following code in list\ref{lst:JSRunnerC} represents the JavaScript runner for the Fibonacci algorithm in C.
+
+\Textcite{Herrera2018} suggested running each experiment 30 times, \parencite{Mendki2020} ran their experiments 100 times, while the JetStream2 Benchmark\footnote{https://browserbench.org/JetStream/in-depth.html} suggested running the experiments 120 times. Initially we only ran our experiments 30 times each. However, upon visual inspection of the distribution of the results using histograms, we found that our data was not normalised. We then proceeded to run the experiments 120 times each. However, even after running the experiments 120 times each, the results mainly did not have a normal distribution. This would influence our choice in statistical tools during our evaluation of the results. 
+
+The code in listing \ref{lst:JSRunnerC} represents the JavaScript runner for the Fibonacci algorithm in C. Figure \ref{fig:JSRunner} shows a sequence diagram of the JavaScript Runner file we created.
 
 \begin{lstlisting}[caption={JavaScript runner for Fibonacci in C WebAssembly},label={lst:JSRunnerC},language=JavaScript,basicstyle=\scriptsize,style=myStyle]
 const wasmModule = require('./fibonacci.js');
@@ -540,8 +542,6 @@ wasmModule().then((instance) => {
 });
 \end{lstlisting}
 
-Figure \ref{fig:JSRunner} shows a sequence diagram of the JavaScript Runner file we created.
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{images/JSRunner.PNG}
@@ -550,12 +550,7 @@ Figure \ref{fig:JSRunner} shows a sequence diagram of the JavaScript Runner file
 \end{figure}
 
 
-\Textcite{Herrera2018} suggested running each experiment 30 times, \parencite{Mendki2020} ran their experiments 100 times, while the JetStream2 Benchmark \parencite{noauthor_jetstream_nodate} suggested running the experiments 120 times. Initially we only ran our experiments 30 times each. However, upon visual inspection of the distribution of the results using histograms, we found that our data was not normalised. We then proceeded to run the experiments 120 times each. However, even after running the experiments 120 times each, the results mainly did not have a normal distribution. This would influence our choice in statistical tools during our evaluation of the results. 
-
 When all of the experiments had been completed, we created Excel files for each language (C, C++, AssemblyScript, Rust). Each column in the spreadsheet represents the algorithm being used in the experiment. Each row represents the execution time of the algorithm for the number of iterations performed. The Excel files were then saved as CSV files for further processing in RStudio to perform the statistical analysis.
-
-
-
 
 Figure \ref{fig:AssemblyScriptResults} shows an example of how the results were stored in Excel once the experiments have been finished. 
 
@@ -583,7 +578,7 @@ Using the previously generated CSV files with the execution times of the algorit
 
 It is important that we understand the distribution of data in our results, as this will determine how we test for significant differences in the execution times, either with parametric tests for a normal distribution, or non-parametric tests for a non-normal distribution. 
 
-We ran the Shapiro Wilk \cite{noauthor_shapirowilk_2021} test on each programming language result file for each algorithm. If the results from the test return a value of 0.05 or more, then it means our data has a normal distribution, otherwise it has a non-normal distribution.
+We ran the Shapiro Wilk\footnote{https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php} test on each programming language result file for each algorithm. If the results from the test return a value of 0.05 or more, then it means our data has a normal distribution, otherwise it has a non-normal distribution.
 
 In RStudio, running this test is quite a simple process. The following listing \ref{lst:RShapiro} shows and example of the R commands used to perform the Shapiro Wilk test on each algorithm for the AssemblyScript results. This process was repeated for each of the other programming languages, C, C++ and Rust.
 
@@ -624,11 +619,11 @@ The results of the Shapiro Wilk tests for normality showing the p-value confirms
   \label{tab:shapiro_results}
 \end{table}
 
-The Shapiro Wilk test showed that our data was not normally distributed. The Central Limit Theorem \cite{noauthor_central_nodate} states that if we have sufficiently large data samples, then the distribution will be approximately normal and parametric tests can be used. However, if the sample size is not sufficiently large and the distribution of data is not normal, then non-parametric tests can be used to determine the significant difference between the samples. 
+The Shapiro Wilk test showed that our data was not normally distributed. The Central Limit Theorem\footnote{https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Probability/BS704_Probability12.html} states that if we have sufficiently large data samples, then the distribution will be approximately normal and parametric tests can be used. However, if the sample size is not sufficiently large and the distribution of data is not normal, then non-parametric tests can be used to determine the significant difference between the samples. 
 
 At this stage, we had to choose between running the experiments again a greater number of times until we achieved a normal distribution, so we could use parametric tests on our results, or keeping them as they are and using non-parametric tests on the results. Given the time constraints on completing this paper, we decided to use the results we had already obtained and apply non-parametric tests.
 
-As a visual aid, we also generated some graphs to confirm the tests. We created visual graphs in both RStudio and Tableau Public \cite{noauthor_tableau_nodate}. The following figure \ref{fig:FibHist} created in Tableau Public shows the distribution of the results of the Fibonacci algorithm in the selected languages. The entire collection of graphs can be found in the Appendix of this paper.
+As a visual aid, we also generated some graphs to confirm the tests. We created visual graphs in both RStudio and Tableau Public\footnote{https://public.tableau.com/en-us/s/}. The following figure \ref{fig:FibHist} created in Tableau Public shows the distribution of the results of the Fibonacci algorithm in the selected languages. The entire collection of graphs can be found in the Appendix of this paper.
 
 \begin{figure}[H]
     \centering
@@ -757,7 +752,7 @@ The statistical tests clearly showed significant differences in almost all of th
 
 \section{Visual Representations}
 
-In this section, we will provide a detailed evaluation of the results for each algorithm. In order to provide a visual representation of the execution times, Tableau Public was used to produce line-charts of the execution time of each language compiled into WebAssembly for each algorithm. The visualizations clearly show that there is a significant difference in execution time between the algorithms. For visual inspection of the WebAssembly code, we used the Wabt toolkit \parencite{noauthor_webassemblywabt_2021} to transform the WASM files into the human readable WAT format. 
+In this section, we will provide a detailed evaluation of the results for each algorithm. In order to provide a visual representation of the execution times, Tableau Public was used to produce line-charts of the execution time of each language compiled into WebAssembly for each algorithm. The visualizations clearly show that there is a significant difference in execution time between the algorithms. For visual inspection of the WebAssembly code, we used the Wabt toolkit\footnote{https://github.com/WebAssembly/wabt} to transform the WASM files into the human readable WAT format. 
 
 \subsection{Numerical Computing Algorithms}
 
@@ -1256,7 +1251,7 @@ We also provided a critical evaluation of the literature currently available for
 
 In chapter 1 of this paper we identified the scope and limitations of our research. These limitations create opportunities for future work in this area. We recommend that more research be done on the comparison of code generated by WebAssembly compilers to identify the differences between their produced code and determine the reasons why these differences exist. Another area of interest could be to compare the file size of the compiled WebAssembly modules from different compilers while compiling the same programming logic.
 
-The list of programming languages that currently compile to WebAssembly can be found at \parencite{appcypher_appcypherawesome-wasm-langs_2021}. Future research should be done to evaluate the performance of all available WebAssembly compilers. Furthermore, as more and more compilers emerge, programming languages with different programming paradigms will be able to compile to WebAssembly, for example Haskell, a functional programming language and ProLog, a logic programming language.  We believe that analysing the WebAssembly byte code and performance of functional, logical, procedural and object-oriented programming languages will be of interest to researchers and application developers.
+The list of programming languages that currently compile to WebAssembly can be found online\footnote{https://github.com/appcypher/awesome-wasm-langs}. Future research should be done to evaluate the performance of all available WebAssembly compilers. Furthermore, as more and more compilers emerge, programming languages with different programming paradigms will be able to compile to WebAssembly, for example Haskell, a functional programming language and ProLog, a logic programming language.  We believe that analysing the WebAssembly byte code and performance of functional, logical, procedural and object-oriented programming languages will be of interest to researchers and application developers.
 
 The Ostrich Benchmark Suite was published in \parencite{Khan2015}. They identified important patterns for numerical computation and ran experiments to compare JavaScript performance against native C code for sequential and parallel operations. Therefore another possibility for future work would be to implement the numerical computing benchmarks identified in the Ostrich Benchmark Suite in multiple programming languages, including languages from different programming paradigms such as procedural, functional, logical and object-oriented, and evaluating the performance of these benchmarks in WebAssembly from multiple compilers.
 
