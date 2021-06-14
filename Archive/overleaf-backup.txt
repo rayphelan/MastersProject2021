@@ -78,7 +78,7 @@
 	Dublin Institute of Technology for the degree of\\
 	M.Sc. in Computing (TU060)\\
        \vspace{0.5cm}
-        \textbf{Date}
+        \textbf{Date: June 14, 2021}
         \vspace{0.8cm}
  
     \end{center}
@@ -116,8 +116,13 @@ of the Institute’s guidelines for ethics in research.
 \noindent
 \textit{\textbf{Signed:}}  \\
 
+\begin{figure}[H]
+    \includegraphics[scale=0.04]{images/20180518_110433.jpg}
+    \label{fig:sig}
+\end{figure}
+
 \noindent
-\textit{\textbf{Date:}}
+\textit{\textbf{Date: June 14, 2021}}
 \vspace{0.8cm}
 
 % Abstract
@@ -159,11 +164,13 @@ Finally, I would like to thank my classmates that I have had the pleasure of get
 \begin{table}[H]
   \centering
     \begin{tabular}{ l l }
-    \textbf{WASM} & Extension for compiled WebAssembly files \\
-    \textbf{WAT} & Extension for human readable format of WebAssembly \\ 
+    \textbf{WASI} & WebAssembly System Interface \\
+    \textbf{WAT} & WebAssembly Text Format \\ 
     \textbf{AS} & AssemblyScript \\
     \textbf{VM} & Virtual Machine \\
-    \textbf{EVM} & Ethereum Virtual Machine
+    \textbf{EVM} & Ethereum Virtual Machine \\
+    \textbf{CSV} & Comma Separated Values \\
+    \textbf{CPU} & Computer Processing Unit \\
     \end{tabular}
 \end{table}
 
@@ -182,21 +189,21 @@ Finally, I would like to thank my classmates that I have had the pleasure of get
 \chapter{Introduction}
 \section{Background}
 
-WebAssembly, also known as WASM, is a new technology revolutionizing the web. It is a low level binary instruction set, similar to pure assembly language, designed to run at near native speeds otherwise only achieved with C code. It can be run on the client-side in web browsers, on the server-side with NodeJS, and even as a stand-alone environment beyond the web, known as WASI (WebAssembly System Interface) \parencite[]{noauthor_wasi_nodate, noauthor_standardizing_nodate, noauthor_bytecodealliancewasmtime_2021}.
+WebAssembly, also known as WASM, is a new technology revolutionizing the web. It is a low-level binary instruction set, similar to pure assembly language, designed to run at near-native speeds otherwise only achieved with C/C++ code. It can be run on the client-side in web-browsers, on the server-side with NodeJS, and even as a stand-alone environment beyond the web, known as WASI (WebAssembly System Interface), \parencite[]{noauthor_wasi_nodate, noauthor_standardizing_nodate, noauthor_bytecodealliancewasmtime_2021}.
 
-WebAssembly was first announced on December 5th, 2019, by the World Wide Web Consortium (W3C). For many years, JavaScript has been the only option for providing interactive applications to websites \parencite{Musch2019}, although there have been many attempts to remedy this, for example Adobe Flash and Microsoft Active X. However, these needed to be installed as browser extensions which prevented them from large scale acceptance. WebAssembly on the other hand, requires no extensions to be installed and is already supported by all of the major web browsers.
+WebAssembly was first announced on December 5th, 2019, by the World Wide Web Consortium (W3C). For many years, JavaScript has been the only option for providing interactive applications in websites \parencite{Musch2019}, although there have been many attempts to remedy this, for example Adobe Flash and Microsoft Active-X. However, these needed to be installed as browser extensions which prevented them from large scale acceptance. WebAssembly on the other hand, requires no extensions to be installed and is already supported by all of the major web-browsers.
 
-Programs written in statically typed languages such as C, C++, and Rust can now be compiled into WebAssembly. As JavaScript is a dynamically typed language, it cannot be directly compiled into WebAssembly. TypeScript however, a subset of the JavaScript language, can be compiled into WebAssembly. Many other programming languages are working towards enabling compilation to WebAssembly \parencite{appcypher_appcypherawesome-wasm-langs_2021}. This opens the door for many new possibilities as developers from these languages can now develop for the web, where previously this was not possible.
+Programs written in statically typed languages, such as C, C++, and Rust can now be compiled into WebAssembly. As JavaScript is a dynamically typed language, it cannot be directly compiled into WebAssembly. TypeScript however, a subset of the JavaScript language, can be compiled into WebAssembly. Many other programming languages are currently working towards enabling compilation to WebAssembly \parencite{appcypher_appcypherawesome-wasm-langs_2021}. This opens the door for many new possibilities as developers from these languages can now develop for the web, where previously this was not possible.
 
-As WebAssembly is essentially binary code, this cannot be easily understood by human readers. There is however a textual representation of WebAssembly, known as WAT \parencite{noauthor_wat_nodate}. There are tools available for converting pure WebAssembly binary code into this text format and vice-versa, such as the WABT tool \parencite{noauthor_webassemblywabt_2021}. C and C++ can be compiled to WebAssembly using the Emscripten compiler \parencite{emscripten} and Rust can be compiled using the wasm-pack compiler \parencite{noauthor_wasm-pack_nodate}. AssemblyScript \parencite{noauthor_assemblyscript_nodate} is a variant of TypeScript which can compile directly to WebAssembly. These compilers will be the focus of this research project.
+As WebAssembly is essentially binary code, this cannot be easily understood by human readers. There is however a textual representation of WebAssembly, known as WAT (WebAssembly Text Format), \parencite{noauthor_wat_nodate}. There are tools available for converting pure WebAssembly binary code into WAT format and vice-versa, such as the WABT tool \parencite{noauthor_webassemblywabt_2021}. C and C++ can be compiled to WebAssembly using the Emscripten compiler \parencite{emscripten} and Rust can be compiled using the wasm-pack compiler \parencite{noauthor_wasm-pack_nodate}. AssemblyScript \parencite{noauthor_assemblyscript_nodate} is a variant of TypeScript which can compile directly to WebAssembly. These compilers will be the focus of this research project.
 
 \section{Research Project/problem}
 
 As more and more WebAssembly compilers emerge, we can expect to see a large variety of applications developed in multiple programming languages and compiled into WebAssembly. However, these compilers do not necessarily produce the same binary code for a given program written in different programming languages, as we will demonstrate later in this paper. In fact, even for a very simple program, such as a function to calculate the Fibonacci sequence, the different compilers are producing very different WebAssembly binary format code. 
 
-These differences can be visually verified by inspecting a human readable format of the WebAssembly function in the text format, WAT. Since the WebAssembly compilers are producing vastly different code between them, even if they are performing the same function, this may lead to questions such as - which compiler generated the correct code? Do the compiled WebAssembly modules all have the same performances, or do they vary in efficiency in terms of execution times and file sizes? 
+These differences can be visually verified by inspecting the WAT format of the WebAssembly function. Since the WebAssembly compilers are producing vastly different code between them, even if they are performing the same function, this may lead to questions such as - which compiler generated the correct code? Do the compiled WebAssembly modules all have the same performances, or do they vary in efficiency in terms of execution times and file sizes? 
 
-Initially one might have thought that once compiled into WebAssembly, there would be little or no difference in the overall performance between the WebAssembly modules compiled with difference compilers. However, if they have significantly different performances, even though they are all running as WebAssembly files, this means that it is important to understand which programming language and respective compiler developers should choose before developing WebAssembly applications.
+Initially, one might have thought that once compiled into WebAssembly, there would be little or no difference in the overall performance between the WebAssembly modules compiled with difference compilers. However, if they have significantly different performances, even though they are all running as WebAssembly files, this means that it is important to understand which programming language and respective compiler developers should choose before developing WebAssembly applications.
 
 These concerns will be the purpose and focus of this research paper. We propose the following research question:
 
@@ -205,15 +212,15 @@ These concerns will be the purpose and focus of this research paper. We propose 
 
 \section{Research Objectives}
 
-The main goal of this research is to determine whether or not there is a significant difference in performance of WebAssembly modules generated from different compilers. As we will discuss later in the literature review, at the time of writing this paper, no other research was found that answered our proposed research question. In order to answer the question, we identified the following research objectives:
+The main goal of this research is to determine whether or not there is a significant difference in the performance of WebAssembly modules generated from different compilers. As we will discuss later in the literature review, at the time of writing this paper, no other research was found that answered our proposed research question. In order to answer the question, we identified the following research objectives:
 
 \begin{itemize} 
-\item Set up a virtual machine environment for running our experiments
+\item Set up a VM (Virtual Machine) environment for running our experiments
 \item Identify programming languages that can be compiled into WebAssembly
 \item Set up the respective WebAssembly compilers for each of the selected programming languages
-\item Identify and code relevant functions and algorithms that can be written in the selected programming languages and that can be properly compiled into WebAssembly
+\item Identify and code relevant functions and algorithms that can be written in the selected programming languages and that can be properly compiled into WebAssembly, maintaining the same syntax as much as possible between the languages, and considering the current limitations of WebAssembly and compilers
 \item Create a benchmark runner for executing the WebAssembly modules from each of the selected programming languages and gather their execution times for post-analysis
-\item Perform statistical analysis on the gathered execution times in order to answer the research question
+\item Perform statistical analysis on the gathered execution times in order to answer the research question, by either accepting or rejecting the null or alternate hypotheses.
 \end{itemize}
 
 \section{Research Methodologies}
@@ -229,27 +236,27 @@ Finally, the reasoning involved in our research can be considered to be deductiv
 
 \section{Scope and Limitations}
 
-The aim of this research paper is to compare the performance of WebAssembly modules generated by different compilers for different programming languages. Our choice of programming languages was influenced by the current available support for each language. We ultimately chose C, C++, Rust and AssemblyScript for our experiments as they provided enough documentation and support for implementing their respective compilers. \Textcite{Long2021} also came to the same conclusion regarding WebAssembly compilers with sufficient support for different programming languages.
+The aim of this research paper is to compare the performance of WebAssembly modules generated by different compilers for different programming languages. Our choice of programming languages was influenced by the current available support for each language. We ultimately chose C, C++, Rust and AssemblyScript for our experiments as they provided enough documentation and support for implementing their respective compilers. \Textcite{Long2021} also came to the same conclusion regarding WebAssembly compilers with sufficient support for different programming languages. There are of course other WebAssembly compilers currently available for compiling other programming languages into WebAssembly, however, they will remain out of scope for this research, but will be suggested as part of future work in this area of research in the concluding chapter.
 
-Although currently many other programming languages actually have the capability of being compiled to WebAssembly, as discussed later in this paper, we found limited resources for implementing the selected benchmarking functions in those languages, and therefore chose benchmarking functions that could be easily written in all of the selected programming languages.
+We also found limited support and resources for implementing benchmarking functions in the languages that we selected, considering that they all needed to maintain the same syntax, and take into account the current limitations of WebAssembly and the compilers. Therefore chose benchmarking functions that could be easily written in all of the selected programming languages.
 
-Another important aspect of this research paper worth highlighting is that we did not necessarily try to find the most efficient implementation for each benchmarking function. Once we were able to replicate the same function in all the selected programming languages, then we would be able to properly compare their performance, regardless of whether the functions were the most efficient implementation or not.
-
-Also worth mentioning is that each WebAssembly compiler must be able to compile the functionality considering the current limitations of WebAssembly, which is considered to be still in infancy stages. Furthermore, this research is limited to execution of WebAssembly modules in a NodeJS environment, rather than the full spectrum of possible environments, such as web-browsers and IoT devices.
+Another important aspect of this research paper worth highlighting is that we did not necessarily try to find the most efficient implementation for each benchmarking function. Once we were able to replicate the same function in all the selected programming languages, then we would be able to properly compare their performance, regardless of whether the functions were the most efficient implementation or not. Furthermore, this research is limited to execution of WebAssembly modules in a NodeJS environment, rather than the full spectrum of possible environments, such as web-browsers and IoT devices, which we will also suggest as part of future work in the concluding chapter.
 
 
 \section{Document Outline}
 
 This research project will be divided into logical chapters. Chapter 1 provides some background knowledge on WebAssembly in general. Here we explain the research problem we have identified and present the research question. We also describe the research objectives and methodologies used. Finally we provide an insight into the scope and limitations of this research.
 
-Chapter 2 will involve a review of the current literature based on relevant scientific publications in order to highlight the research gaps and importance of our research question. Chapter 3 describes the experiment design and set up used to gather the required data. Chapter 4 will provide an in-dept evaluation and discussion on the results gathered through our statistical tests. Finally, chapter 5 will provide a conclusion to this research, describing the impact of our contributions and outlining future work.
+Chapter 2 will involve a review of the current literature based on relevant scientific publications in order to highlight the research gaps and importance of our research question. Chapter 3 describes the experiment design and set up used to gather the required data for our evalutation. Chapter 4 will provide an in-dept evaluation and discussion on the results gathered through our statistical tests. Finally, chapter 5 will provide a conclusion to this research, describing the impact of our contributions and outlining future work.
 
 
 % Literature review chapter
 % ============================================================= %
 \chapter{Review of existing literature}
 
-Although WebAssembly is still relatively new, it is rapidly becoming a highly researched topic in the last 18 months. Researchers have been evaluating the possible benefits and use cases of WebAssembly, while developers have been enjoying freedom of choice in the programming languages they use to develop their applications, using a WebAssembly compiler to achieve the near native speeds promised by WebAssembly. In this section, we will review currently available literature that carried out some benchmarking on the performance of WebAssembly, or that proposed WebAssembly as solution to improve some existing applications, compared with the traditional approaches. In doing so, we will reveal the gap in the literature that has led us to our research question, highlighting that not enough research and evaluation has been done on the performance of code generated by the various WebAssembly compilers. We highlight that choosing only one WebAssembly compiler to evaluate the performance of WebAssembly is insufficient.
+Although WebAssembly is still relatively new, it is rapidly becoming a highly researched topic in the last 18 months. Researchers have been evaluating the possible benefits and use cases of WebAssembly, while developers have been enjoying freedom of choice in the programming languages they use to develop their applications, using a WebAssembly compiler to achieve the near native speeds promised by WebAssembly. 
+
+In this section, we will review currently available literature that carried out some benchmarking on the performance of WebAssembly, or that proposed WebAssembly as solution to improve some existing applications, compared with the traditional approaches. In doing so, we will reveal the gap in the literature that has led us to our research question, highlighting that not enough research and evaluation has been done on the performance of code generated by the various WebAssembly compilers. We highlight the research gap that choosing only one WebAssembly compiler to evaluate the performance of WebAssembly is insufficient.
 
 \Textcite{Sandhu2018} compared the performance of JavaScript and WebAssembly against C for sparse matrix-vector multiplication. They discover a slowdown of 2.2x to 5.8x with JavaScript versus C, but WebAssembly performing similar or better at times when compared with C in the browser. They used the Emscripten compiler to generate the WebAssembly modules from C code for their experiments. However, only the one WebAssembly compiler was used, therefore it is unknown whether WebAssembly code generated from other compilers might have produced different results.
 
@@ -269,7 +276,7 @@ Although WebAssembly is still relatively new, it is rapidly becoming a highly re
 
 \Textcite{Mendki2020} proposed a WebAssembly Serverless Edge Computing as an alternative to the native container-based application. They developed a compute and memory intensive application with file I/O and image classification using Rust and compiled it into WebAssembly. They found that WebAssembly had a lower footprint than the container-based solution while also showing faster start-up times, but the runtimes were slower than the native container application. However, only WebAssembly compiled from Rust was evaluated in their proposal, therefore it is unknown how well WebAssembly compiled from other languages might have performed.
 
-A WebAssembly solution to the stateless containers used by existing serverless platforms was published in \parencite{Shillaker2020}, providing isolated memory and CPU, with state sharing capabilities. Their solution used the LLVM compiler \parencite{noauthor_llvm_nodate} to translate applications into WebAssembly from multiple programming languages such as, C, C++, Python, JavaScript and TypeScript. Their evaluation reported a 2x performance speed-up with 10x less memory consumption using their proposal against dockerised containers. However, they also only used the one compiler for the generation of WebAssembly modules in their evaluations.
+A WebAssembly solution to the stateless containers used by existing serverless platforms was published in \parencite{Shillaker2020}, providing isolated memory and CPU (Computer Processing Unit), with state sharing capabilities. Their solution used the LLVM compiler \parencite{noauthor_llvm_nodate} to translate applications into WebAssembly from multiple programming languages such as, C, C++, Python, JavaScript and TypeScript. Their evaluation reported a 2x performance speed-up with 10x less memory consumption using their proposal against dockerised containers. However, they also only used the one compiler for the generation of WebAssembly modules in their evaluations.
 
 \Textcite{Jeong2019} proposed an edge computing framework for offloading JavaScript and WebAssembly state between mobile devices, edge computing devices and cloud services. This system saves the state of JavaScript workers, objects and WebAssembly functions, and enables the transfer and restoration of these between devices, resulting in an 8.4x speedup compared with only offloading pure JavaScript code. All the WebAssembly files used in their experiments were generated from C++ code using the Emscripten compiler. Once again, this highlights the gap of knowing how WebAssembly from other compilers would have performed in these experiments.
 
@@ -281,7 +288,7 @@ WebAssembly was proposed in \parencite{Long2021} as a lightweight alternative fo
 
 \Textcite{Tiwary2020} proposed an alternative to container-based serverless computing, addressing their cold-start problems and complicated architectures, while providing stateful memory and multi-tenancy isolation. Their proposal suggests WebAssembly to be executed directly on ring 0 with the serverless functions placed as close to the data as possible, providing CPU memory and filesystem isolation that is required for multi-tenancy in cloud computing. Their proposal was developed in Rust and compiled into WebAssembly using the Rust WebAssembly compiler, therefore once again, performance of WebAssembly is based on the code generated from a single WebAssembly compiler.
 
-\parencite{DBLP:journals/corr/abs-2012-01032} evaluate the performance of Ethereum blockchain smart contracts using WebAssembly. They implement 12 benchmarks in Rust and compile to WebAssembly. They also use the emerging compiler SOLL \parencite{noauthor_second-statesoll_2021} that generates WebAssembly bytecode from Solidity \parencite{team_solidity_nodate}. Their experiments compare the performance of the WebAssembly driven blockchain against the Ethereum Virtual Machine (EVM) implementation, finding that WebAssembly driven blockchain does not perform as well as the EVM. However, they did not use the full range of available WebAssembly compilers by implementing their benchmarks in other programming languages, which perhaps might have produced different results for the evaluation of WebAssembly.
+\parencite{DBLP:journals/corr/abs-2012-01032} evaluate the performance of Ethereum blockchain smart contracts using WebAssembly. They implement 12 benchmarks in Rust and compile to WebAssembly. They also use the emerging compiler SOLL \parencite{noauthor_second-statesoll_2021} that generates WebAssembly bytecode from Solidity \parencite{team_solidity_nodate}. Their experiments compare the performance of the WebAssembly driven blockchain against the EVM (Ethereum Virtual Machine) implementation, finding that WebAssembly driven blockchain does not perform as well as the EVM. However, they did not use the full range of available WebAssembly compilers by implementing their benchmarks in other programming languages, which perhaps might have produced different results for the evaluation of WebAssembly.
 
 FAUST is a domain specific functional programming language used in audio processing and sound synthesis for applications such as synthesizers, musical instruments and sound effects used in concerts, artistic productions, education and research. \Textcite{Letz2018} propose an alternative by compiling FAUST into WebAssembly and performing benchmarks to compare the performance of WebAssembly with native versions. They found that WebAssembly ran up to 66\% slower than native C++ versions. Interestingly, they question the code quality that will eventually be generated by multiple WebAssembly compilers. However, their experiments only involved the WebAssembly modules generated by the Emscripten compiler.
 
@@ -300,7 +307,7 @@ The entire source code and results of our experiments are publicly available on 
 
 https://github.com/rayphelan/MastersProject2021 \\
 
-After installing the WebAssembly compilers for each of the selected languages and their required dependencies, this experiment can be fully reproduced by cloning the Git repository on a local Virtual Machine and following the steps provided on the Github repository and in this paper.
+After installing the WebAssembly compilers for each of the selected languages and their required dependencies, this experiment can be fully reproduced by cloning the Git repository on a local VM and following the steps provided on the Github repository and in this paper.
 
 \subsection{Hypotheses}
 
@@ -320,11 +327,11 @@ Furthermore, the objective of our experiments is not to benchmark the printing c
 
 \section{Experiment Set up}
 
-In the following sections will provide details on the Virtual Machine set up, Software Installation, Programming Languages and Algorithms used to perform our experiments. We also provide details of how the benchmarks were executed and how the results were gathered.
+In the following sections will provide details on the VM set up, Software Installation, Programming Languages and Algorithms used to perform our experiments. We also provide details of how the benchmarks were executed and how the results were gathered.
 
-\subsection{Virtual Machine and Host Environment}
+\subsection{VM and Host Environment}
 
-The Virtual Machine (VM) was installed on top of a Windows desktop computer. The details of both are listed below.
+The VM was installed on top of a Windows desktop computer. The details of both are listed below.
 
 Table \ref{tab:vm_setup} show the details of the VM used in the experiments. 
 \begin{table}[H]
@@ -334,7 +341,7 @@ Table \ref{tab:vm_setup} show the details of the VM used in the experiments.
     \textbf{Operating System} & Ubuntu 20.10 (64-bit)\\ \hline
     \textbf{RAM} & 12075 MB \\ \hline
     \end{tabular}
-  \caption{Virtual Machine}
+  \caption{VM}
   \label{tab:vm_setup}
 \end{table}
 
@@ -374,7 +381,7 @@ RStudio \parencite{noauthor_rstudio_nodate} was used to perform the statistical 
 
 \section{Algorithms}
 
-The algorithms used in this experiment were first sourced on the internet as C/C++ programs. Then the equivalent of these algorithms were written in AssemblyScript and Rust programming languages. The algorithms were then compiled to WebAssembly using their respective compilers. The selection of algorithms used includes searching, sorting and numerical computing algorithms.
+The algorithms used in our experiments were first sourced on the internet as C/C++ programs. Then the equivalent of these algorithms were written in AssemblyScript and Rust programming languages. We created a directory for each of the selected programming languages. Inside each of these directories, we created a directory for each of the selected algorithms. The algorithms were coded in their respective folder for their respective programming language. The algorithms were then compiled to WebAssembly using their respective compilers. The selection of algorithms used includes searching, sorting and numerical computing algorithms.
 
 In our experiments, some of the algorithms were given an array of 100,000 elements as their input. A JavaScript program was created which generated 3 versions of an array with 100,000 elements. Each element is a unique floating point number with 7 decimal places. The first version is a sorted array with 100,000 elements. The second version is the same array in reserve order. The third version is the array with the elements in random positions. The respective array for each experiment was copied directly into the algorithms as their input parameters and the same array was provided to all algorithms which required an array as the input parameter.
 
@@ -382,15 +389,15 @@ The selection of algorithms used in this research were influenced by other resea
 
 \subsection{Numerical Computing Algorithms}
 
-The numerical computing algorithms used in this experiment are NQueens, Primary Number and Fibonacci number algorithms. 
+The numerical computing algorithms used in our experiments are NQueens, Primary Number and Fibonacci Number algorithms. 
 
 \subsubsection{NQueens}
 
-The 8 Queens Puzzle was originally published in 1848 \parencite{noauthor_eight_2021}. The objective is to place 8 Chess Queens on a chess board that is of size 8x8, in such a manor that no Queens are in direct threat from each other. Given the complexity of this puzzle when used with larger board sizes, it has been used many times as a software algorithm for benchmarking, known as the NQueens algorithm. 
+The 8 Queens Puzzle was originally published in 1848 \parencite{noauthor_eight_2021}. The objective is to place 8 Chess Queens on an 8x8 chess board in such a manor that no Queens are in direct threat from each other. Given the complexity of this puzzle when used with larger board sizes, it has been used many times as a software algorithm for benchmarking, known as the NQueens back-tracking algorithm. 
 
 The NQueens algorithm is part the Ostrich Benchmark Suite \parencite{ostrich} developed at the Sable Lab at McGill University. It has been a popular research topic in computer science research for many years \parencite[]{Guldal2016, Ayub2018, Alhassan2019}.
 
-In our experiments, we implemented two versions of the NQueens algorithm. The first using board of 24x24, the second using a board of 27x27. The algorithm was implemented in all of the selected programming languages keeping the same code structure as much as possible. The output of the algorithms was the printed solution of the board.
+In our experiments, we implemented two versions of the NQueens algorithm. The first using a board of 24x24, the second using a board of 27x27. The reason we chose the 24x24 size was that it provided enough complexity between all the selected programming languages in order to return a benchmarked time other than micro-seconds. The reason we did not go beyond the 27x27 size is because AssemblyScript was already taking considerably longer than the other programming languages the larger the board size became. The algorithm was implemented in all of the selected programming languages keeping the same code structure as much as possible. The output of the algorithms was the printed solution of the board.
 
 The C/C++ version of this algorithm was sourced at \parencite{nqueens_code}. The NQueens algorithm has a complexity of $O({n}^{n})$.
 
@@ -400,12 +407,12 @@ An important topic in computer science and cryptography is Number Theory, where 
 
 \subsubsection{Fibonacci}
 
-The Fibonacci sequence is another well known computer algorithm used for benchmarking and was recently used in \parencite{Mendki2020} for benchmarking WebAssembly performance. It takes a number as the input parameter, and adds the previous two numbers together to produce the next Fibonacci number sequence of the given input. For our experiment, we used the recursive method to calculate the Fibonacci sequence. The algorithm will return the 45th Fibonacci sequence number. The Fibonacci algorithm has a complexity of $O(\log{}n)$.
+The Fibonacci sequence is another well known computer algorithm used for benchmarking and was recently used in \parencite{Mendki2020} for benchmarking WebAssembly performance. It takes a number as the input parameter, and adds the previous two numbers together to produce the next Fibonacci number sequence of the given input. For our experiment, we used the recursive method to calculate the Fibonacci sequence. The algorithm will return the 45th Fibonacci sequence number. The reason that we limited our experiment to calculating only the 45th number and not higher, is that it already provided enough complexity in the selected programming languages to perform our evaluations, with the execution times benchmarking between 5 and 10 seconds between the languages. The Fibonacci algorithm has a complexity of $O(\log{}n)$.
 
 
 \subsection{Sorting Algorithms}
 
-Sorting plays a crucial role in many algorithms \parencite{Abhay2019}. The sorting algorithms used in this experiment are Bubble Sort, Heap Sort, Merge Sort, Selection Sort and Shell Sort. Each algorithm is given the same array of 100,000 elements as the input. Each element consists of a unique floating point number between 0 and 99,999 with 7 decimal places. The input array is sorted in reverse order and the output of the algorithms will produce a sorted array of the same elements.
+Sorting plays a crucial role in many algorithms \parencite{Abhay2019}. The sorting algorithms used in this experiment are Bubble Sort, Heap Sort, Merge Sort, Selection Sort and Shell Sort. Each algorithm is given the same array of 100,000 elements as the input. Each element consists of a unique floating point number between 0 and 99,999 with 7 decimal places. The input array is sorted in reverse order, providing the algorithm with the worst case scenario, and the output of the algorithms will produce the same array in sorted order.
 
 \subsubsection{Bubble Sort}
 
@@ -439,7 +446,7 @@ The Binary Search algorithm assumes that the given array will in a sorted order.
 
 \subsubsection{Linear Search}
 
-The Linear Search algorithm does not require a sorted array. In this experiment, the Linear Search algorithm was given an array of 100,000 elements of unique floating point numbers between 0 and 99,999 with 7 decimal places and the array has been given a random ordering. The algorithm performs a simple search on every element in the array, starting from the first element and finishing on the last element. The C/C++ code for this algorithm was sourced at \parencite{linearsearch} and the algorithms were written in the other languages from scratch. The Linear Search has a complexity of $O({}n)$.
+The Linear Search algorithm does not require a sorted array. In this experiment, the Linear Search algorithm was given an array of 100,000 elements of unique floating point numbers between 0 and 99,999 with 7 decimal places and the array has been given a random ordering. The algorithm performs a simple search on every element in the array, starting from the first element and finishing when the number being searched for is found, which could go all the way to the last element. The C/C++ code for this algorithm was sourced at \parencite{linearsearch} and the algorithms were written in the other languages from scratch. The Linear Search has a complexity of $O({}n)$.
 
 \section{Compiling to WebAssembly}
 
@@ -466,7 +473,7 @@ The optimization levels that Emscripten provides are listed in table \ref{tab:em
   \label{tab:emscripten}
 \end{table}
 
-Emscripten also takes an arguement to modularize the code. This means that the compiler will generate the JavaScript glue file in such a way that allows it to be imported as a JavaScript module. The compiler puts all of the required JavaScript into a factory function which can be called on to create an instance of the WebAssembly module. The following code in \ref{lst:BinaryCWasm} shows how the WebAssembly file and the JavaScript glue file were generated using Emscripten. 
+Emscripten also takes an arguement to modularize the code. This means that the compiler will generate the JavaScript glue file in such a way that allows it to be imported as a JavaScript module. The compiler puts all of the required JavaScript into a factory function which can be called on to create an instance of the WebAssembly module. The following code in listing \ref{lst:BinaryCWasm} shows how the WebAssembly file and the JavaScript glue file were generated using Emscripten for the BinarySearch algorithm. 
 
 \begin{lstlisting}[caption={Compiling BinarySearch from C to WebAssembly},label={lst:BinaryCWasm},language=Emscripten,basicstyle=\scriptsize,style=myStyle]
 emcc binarySearch.c -o binarySearch.js -O2 
@@ -476,7 +483,7 @@ emcc binarySearch.c -o binarySearch.js -O2
 
 \subsection{AssemblyScript to WebAssembly}
 
-AssemblyScript was designed especially to target WebAssembly but offers a familiar syntax for TypeScript and JavaScript developers. It uses Node Package Manager (NPM) \parencite{noauthor_npm_nodate} as the installer. The AssemblyScript compiler also comes with options for optimization. For our experiments we chose the optimization level 3, for speed rather than code size, like we did with the Emscripten optimization levels. The following code in \ref{lst:ASOpt} show how the WebAssembly and JavaScript files were generated using AssemblyScript.
+AssemblyScript was designed specifically to target WebAssembly while offering a familiar syntax for TypeScript and JavaScript developers. It uses Node Package Manager (NPM) \parencite{noauthor_npm_nodate} as the installer. We created a new NPM application for each algorithm. Instructions for setting up new NPM applications are detailed on our Github repository. The AssemblyScript compiler also comes with options for optimization. For our experiments we used the optimization level 3, for speed rather than code size, like we did with the Emscripten optimization levels. However, these optimization levels are actually applied by default, but can be altered in the configuration files of the compiler. The following code in listing \ref{lst:ASOpt} show how the WebAssembly and JavaScript files were generated using AssemblyScript.
 
 \begin{lstlisting}[caption={AssemblyScript Optimization},label={lst:ASOpt},language=AssemblyScript,basicstyle=\scriptsize,style=myStyle]
 npm run asbuild
@@ -484,7 +491,9 @@ npm run asbuild
 
 \subsection{Rust to WebAssembly}
 
-To compile Rust to WebAssembly, the wasm-pack compiler was used. We passed an option to the compiler to note that we were targetting the NodeJS environment. This customizes the JavaScript glue file so it can be easily run in NodeJS. Wasm-pack allows us to specify whether or not the build should be optimized for production, using the --release keyword. However if no keyword is provided, the --release profile is automatically used. This was the optimization levels used in our experiments.  The following code in \ref{lst:wasmpack} shows how the WebAssembly and JavaScript files were generated for Rust.
+To compile Rust to WebAssembly, the wasm-pack compiler was used. Instructions for creating new wasm-pack applications can be found on our Github repository. We created a new wasm-pack application for each of our selected algorithms. Once inside the directory of the wasm-pack application created for each algorithm, the WebAssembly modules can be compiled.
+
+We passed an option to the compiler to note that we were targetting the NodeJS environment. This customizes the JavaScript glue file so it can be easily run in NodeJS. Wasm-pack allows us to specify whether or not the build should be optimized for production, using the --release keyword. However if no keyword is provided, the --release profile is automatically used. This was the optimization levels used in our experiments. The following code in listing \ref{lst:wasmpack} shows how the WebAssembly and JavaScript files were generated for Rust.
 
 \begin{lstlisting}[caption={Rust to WebAssembly},label={lst:wasmpack},language=Rust,basicstyle=\scriptsize,style=myStyle]
 wasm-pack build --target nodejs
@@ -494,24 +503,9 @@ wasm-pack build --target nodejs
 
 \section{Benchmarking and Gathering Results}
 
-WebAssembly modules are most commonly loaded via its JavaScript API \parencite{Hall2019}. The WebAssembly compilers used in our experiments generate the boilerplate JavaScript which can then be be converted into a JavaScript module, allowing it to be conveniently imported into other JavaScript functions. Inspired by the Ostrich Benchmark Suite \parencite{ostrich} which created a runner python for performing the benchmarks and recording the results, we created our own JavaScript runner which runs our experiments in NodeJS with the desired number of iterations and records the final results onto a CSV file for post processing.
+WebAssembly modules are most commonly loaded via its JavaScript API \parencite{Hall2019}. The WebAssembly compilers used in our experiments generate the boilerplate JavaScript glue which can then be be converted into a JavaScript module, allowing it to be conveniently imported into other JavaScript functions. Inspired by the Ostrich Benchmark Suite \parencite{ostrich} which created a python runner script for executing the benchmarks and recording the results, we created our own JavaScript runner which runs our experiments in NodeJS with the desired number of iterations and records the final results onto a CSV (Comma Separated Values) file for post processing.
 
-Each compiler generates the WASM file and the JavaScript glue for loading and interacting with the WASM file. For each algorithm in each language, we created a new JavaScript runner which loads the JavaScript Glue file. Once the WebAssembly module has been loaded, the JavaScript runner executes a loop which runs the main function in the corresponding WebAssembly module. The number of iterations in the loop depends on how many times we want to perform the experiment. After each iteration, the execution time in nanoseconds is measured and converted into seconds and milliseconds before being saved to an array of results. After the final iteration, the array is saved into a CSV file.
-
-\Textcite{Herrera2018} suggested running each experiment 30 times, \parencite{Mendki2020} ran their experiments 100 times, while the JetStream2 Benchmark \parencite{noauthor_jetstream_nodate} suggested running the experiments 120 times. Initially we only ran our experiments 30 times each. However, upon visual inspection of the distribution of the results using histograms, we found that our data was not normalised. We then proceeded to run the experiments 120 times each. However, even after running the experiments 120 times each, the results mainly did not have a normal distribution. This would influence our choice in statistical tools during our evaluation of the results.
-
-Figure \ref{fig:JSRunner} shows a sequence diagram of the JavaScript Runner file we created. The WebAssembly module is first loaded into the JavaScript memory. The JavaScript then iterates through a loop for the number of times we defined that was required and executes the main function in the compiled WebAssembly. Note that the time for loading the WebAssembly module is not being measured, since we are only interested in the execution time.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6]{images/JSRunner.PNG}
-    \caption{Experiment JavaScript Runner}
-    \label{fig:JSRunner}
-\end{figure}
-
-Our JavaScript experiment runner was manually invoked using NodeJS command line for each algorithm in each programming language. When all of the experiments had been completed, we created Excel files for each language (C, C++, AssemblyScript, Rust). 
-
-Each column represents the algorithm being used in the experiment. Each row represents the execution time of the algorithm for the number of iterations performed. The Excel files were then saved as CSV files for further processing in RStudio to perform the statistical analysis.
+Each compiler generates the WASM file and the JavaScript glue for loading and interacting with the WASM file. For each algorithm in each language, we created a new JavaScript runner which loads the JavaScript Glue file. The JavaScript runner was manually invoked using NodeJS command line for each algorithm in each programming language.  Once the WebAssembly module has been loaded, the JavaScript runner executes a loop which runs the main function in the corresponding WebAssembly module. The number of iterations in the loop depends on how many times we want to perform the experiment. After each iteration, the execution time in nanoseconds is measured and converted into seconds and milliseconds before being saved to an array of results. After the final iteration, the array is saved into a CSV file. Note that the time for loading the WebAssembly module is not being measured, since we are only interested in the execution time. 
 
 The following code in list\ref{lst:JSRunnerC} represents the JavaScript runner for the Fibonacci algorithm in C.
 
@@ -546,6 +540,22 @@ wasmModule().then((instance) => {
 });
 \end{lstlisting}
 
+Figure \ref{fig:JSRunner} shows a sequence diagram of the JavaScript Runner file we created.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/JSRunner.PNG}
+    \caption{Experiment JavaScript Runner}
+    \label{fig:JSRunner}
+\end{figure}
+
+
+\Textcite{Herrera2018} suggested running each experiment 30 times, \parencite{Mendki2020} ran their experiments 100 times, while the JetStream2 Benchmark \parencite{noauthor_jetstream_nodate} suggested running the experiments 120 times. Initially we only ran our experiments 30 times each. However, upon visual inspection of the distribution of the results using histograms, we found that our data was not normalised. We then proceeded to run the experiments 120 times each. However, even after running the experiments 120 times each, the results mainly did not have a normal distribution. This would influence our choice in statistical tools during our evaluation of the results. 
+
+When all of the experiments had been completed, we created Excel files for each language (C, C++, AssemblyScript, Rust). Each column in the spreadsheet represents the algorithm being used in the experiment. Each row represents the execution time of the algorithm for the number of iterations performed. The Excel files were then saved as CSV files for further processing in RStudio to perform the statistical analysis.
+
+
+
 
 Figure \ref{fig:AssemblyScriptResults} shows an example of how the results were stored in Excel once the experiments have been finished. 
 
@@ -560,7 +570,7 @@ Figure \ref{fig:AssemblyScriptResults} shows an example of how the results were 
 
 RStudio was used to perform the statistical analysis of the results. RStudio provides a convenient way of running statistical tests for normality and significance. It also provides functionality to plot graphs for visual interpretation of the results. 
 
-Using the previously generated CSV files with the execution times of the algorithms in each language, these were imported into RStudio. The required RStudio libraries were also included. Figure \ref{fig:RStudio} shows how the libraries were included and how the CSV files were imported. The entire source code used in RStudio is included in the Appendix section of this paper.
+Using the previously generated CSV files with the execution times of the algorithms in each language, these were imported into RStudio. The required RStudio libraries were also included. Figure \ref{fig:RStudio} shows how the libraries were included and how the CSV files were imported. The entire source code used in RStudio is included in the Appendix section of this paper and on our Github repository.
 
 \begin{figure}[H]
     \centering
@@ -652,7 +662,7 @@ The following graphs created in RStudio, shown in figure \ref{fig:ASDist} repres
 
 In order to accept or reject the null hypothesis, we need to determine whether there is a significant difference in the execution times of the algorithms when compared to each other. We grouped the languages into pairs and ran a non-parametric test on them to obtain the p-value. Having a p-value of 0.05 or less means that we can reject the null hypothesis as there is significant difference between the two samples.
 
-The non-parametric test we chose is the Mann-Whitney U Test, which is used to compare two independent samples and the data is not normally distributed. We ran the test on each algorithm for AssemblyScript vs C, AssemblyScript vs C++, AssemblyScript vs Rust, C vs C++, C vs Rust and C++ vs Rust.
+The non-parametric test we chose is the Mann-Whitney U Test, which is used to compare exactly two independent samples and the data is not normally distributed. We ran the test on each algorithm for AssemblyScript vs C, AssemblyScript vs C++, AssemblyScript vs Rust, C vs C++, C vs Rust and C++ vs Rust.
 
 The following code in listing \ref{lst:MannWhitney} shows how the Mann-Whitney U Test was run on the BinarySearch algorithm for AssembyScript vs C, AssemblyScript vs C++ and AssemblyScript vs Rust. The entire RStudio code can be found in the Appendix of this paper and on our Github repository.
 
@@ -662,9 +672,7 @@ wilcox.test(AssemblyScript$BinarySearch,CPP$BinarySearch)
 wilcox.test(AssemblyScript$BinarySearch,Rust$BinarySearch)
 \end{lstlisting}
 
-Running the Mann-Whitney U Test on each algorithm for each of our pairs of languages produced the following results. The values represented in these results are the p-value. 
-
-In order to facilitate the visualisataion of these results in this paper, we have broken down the results into two tables. The first table \ref{tab:MannWU1} shows the results of AssemblyScript vs C, AssemblyScript vs C++ and AssemblyScript vs Rust. The second table \ref{tab:MannWU2} shows the results of C vs C++, C vs Rust and C++ vs Rust.
+The values represented in following the results are the p-value. In order to facilitate the visualisataion of the results, we have divided the results into two tables. The first table \ref{tab:MannWU1} shows the results of AssemblyScript vs C, AssemblyScript vs C++ and AssemblyScript vs Rust. The second table \ref{tab:MannWU2} shows the results of C vs C++, C vs Rust and C++ vs Rust.
 
 \begin{table}[H]
   \centering
@@ -732,15 +740,13 @@ The main objective of our experiments was to answer the research question by eit
 
 We ran statistical tests on our paired data groups to obtain the p-values, which determines whether or not there is a significant difference between grouped pairs. A p-value of 0.05 or less indicates that there is indeed a significant difference, therefore we must reject the null hypothesis and accept the alternate hypothesis. This can be summarized by the following formula:
 
-\[ p \leq 0.05 \]
+\[ p \leq 0.05 = H1 \]
 
 On the other hand, having a p-value of higher than 0.05 indicates that there is no significant difference between the pair, and we must accept the null hypothesis and reject the alternate hypothesis. This can be summarized by the following formula:
 
-\[ p \textgreater 0.05 \]
+\[ p \textgreater 0.05 = H0 \]
 
-The statistical tests clearly showed significant differences in almost all of the experiments. One exception was while comparing C to C++, which on some experiments had a p-value greater than 0.05. However, this was actually to be expected, since both C and C++ are compiled to WebAssembly using the same compiler and the code is almost identical. 
-
-Figure \ref{fig:significance} highlights the results where the p-values were greater than 0.05, meaning there were no significant difference in those execution times. The results also show that for all other language pairs, there were significant differences in the execution times.
+The statistical tests clearly showed significant differences in almost all of the experiments. One exception was while comparing C to C++, which on some experiments had a p-value greater than 0.05. However, this is not surprising, since both C and C++ are compiled to WebAssembly using the same compiler and the code is almost identical. Figure \ref{fig:significance} highlights the results where the p-values were greater than 0.05, meaning there were no significant difference in those execution times. The results also show that for all other language pairs, there were significant differences in the execution times.
 
 \begin{figure}[H]
     \centering
@@ -751,11 +757,11 @@ Figure \ref{fig:significance} highlights the results where the p-values were gre
 
 \section{Visual Representations}
 
-In order to provide a visual representation of the execution times, Tableau Public was used to produce line-charts of the execution time of each language compiled into WebAssembly for each algorithm. The visualizations clearly show that there is a significant difference in execution time between the algorithms. For visual inspection of the WebAssembly code, we used the Wabt toolkit \parencite{noauthor_webassemblywabt_2021} to transform the WASM files into a human readable format with the WAT extension.
+In this section, we will provide a detailed evaluation of the results for each algorithm. In order to provide a visual representation of the execution times, Tableau Public was used to produce line-charts of the execution time of each language compiled into WebAssembly for each algorithm. The visualizations clearly show that there is a significant difference in execution time between the algorithms. For visual inspection of the WebAssembly code, we used the Wabt toolkit \parencite{noauthor_webassemblywabt_2021} to transform the WASM files into the human readable WAT format. 
 
 \subsection{Numerical Computing Algorithms}
 
-In this section we will discuss the performance of the compiled languages for each of the Numerical Computing algorithms used in our experiments. These algorithms are pure mathematical and did not require the input array of 100,000 elements.
+The Numerical Computing algorithms used in our experiments are pure mathematical functions and did not require the input array of 100,000 elements.
 
 \subsubsection{Fibonacci}
 
@@ -763,7 +769,7 @@ The figure \ref{fig:Fibonacci} shows the execution times for the Fibonacci algor
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/Fibonacci.PNG}
+    \includegraphics[scale=0.4]{images/Fibonacci.PNG}
     \caption{Fibonacci}
     \label{fig:Fibonacci}
 \end{figure}
@@ -1031,7 +1037,7 @@ The following listing \ref{lst:FibWATRust} is the WAT file representation of the
   (export "__wbindgen_start" (func 3)))
 \end{lstlisting}
 
-Based on our experiment and analysis of the Fibonacci algorithm, we can clearly see a significant difference in the performance of the WebAssembly modules from different programming languages, with the exception of C and C++ that produced identical WebAssembly files and had a p-value greater than 0.05. We can also see a clear difference of the WebAssembly files when converted into human readable format.
+Based on our experiment and analysis of the Fibonacci algorithm, we can clearly see a significant difference in the performance of the WebAssembly modules from different programming languages, with the exception of C and C++ that produced identical WebAssembly files and had a p-value greater than 0.05. We can also see a clear difference of the WebAssembly files when converted into WAT format.
 
 In order to not unnecessarily bloat the contents of this paper, the source code and WAT files for the remaining algorithms will not be included directly in the paper. However, they may be viewed on our Github repository.
 
@@ -1039,9 +1045,11 @@ In order to not unnecessarily bloat the contents of this paper, the source code 
 
 The visualization in figure \ref{fig:Prime} shows that C and C++ perform with similar execution times, although their p-values were less than 0.05. We can also see that Rust performs slightly slower than C and C++. Both however generally performed the PrimeNumber algorithm in less than 1 second every time. On the other hand, we can clearly see that AssemblyScript took longer than all the other languages, taking between 4 to 5 seconds to complete.
 
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/PrimeNumber.PNG}
+    \includegraphics[scale=0.4]{images/PrimeNumber.PNG}
     \caption{PrimeNumber}
     \label{fig:Prime}
 \end{figure}
@@ -1054,122 +1062,155 @@ The source code for the NQueens algorithms for each of the selected languages we
 
 The execution times of the NQueen24 and NQueen27 algorithms can be viewed in figure \ref{fig:NQ24} and figure \ref{fig:NQ27}.
 
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/NQueen24.PNG}
+    \includegraphics[scale=0.4]{images/NQueen24.PNG}
     \caption{NQueen24}
     \label{fig:NQ24}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/NQueen27.PNG}
+    \includegraphics[scale=0.4]{images/NQueen27.PNG}
     \caption{NQueen27}
     \label{fig:NQ27}
 \end{figure}
 
 From these visualizations we can see that C, C++ and Rust performed with similar execution times, generally with less than 1 second every time. However, there was a clear difference in the execution times for AssemblyScript, which took between 3 and 5 seconds per execution.
 
+\hfill \break
 
 \subsection{Searching Algorithms}
 
 The source code for the Searching algorithms were kept syntactically the same as much as possible. An array of 100,000 elements was hard-coded into each of the algorithms. This caused the WebAssembly compilers generated huge WASM and WAT files for each language.
 
+\hfill \break
+
 \subsubsection{BinarySearch}
 
 For the BinarySearch algorithm, all languages had visually similar execution times, but it is still clear that there are differences between their performances. The statistical tests for C and C++ returned a value greater than 0.05, meaning that there was no significant difference between their execution times. However, Rust appears to have the fastest execution times over C and C++, while AssemblyScript has once again the slowest execution times. There were also significant differences in the inspection of the WAT files for the BinarySearch algorithm when converted into WebAssembly. The execution times for the BinarySearch algorithm can be view in figure \ref{fig:BS}. 
 
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/BinarySearch.PNG}
+    \includegraphics[scale=0.4]{images/BinarySearch.PNG}
     \caption{BinarySearch}
     \label{fig:BS}
 \end{figure}
 
+\hfill \break
+\hfill \break
+
 \subsubsection{LinearSearch}
 
-The LinearSearch algoritm shows that all languages had significant differences in their execution times, although visually, C and C++ appear to have similar performances. In this case, Rust had the fastest execution times, generally running at around 4 seconds each time. C and C++ executed at about 5 to 6 seconds each time, while AssemblyScript had the slowest execution times, performing between 12 and 16 seconds for each iteration. The figure \ref{fig:LS} shows the execution times for the LinearSearch algorithm in the selected languages.
+The LinearSearch algorithm statistical tests showed that all languages had significant differences in their execution times, although visually, C and C++ appear to have similar performances. Once again Rust had the fastest execution times, generally running at around 4 seconds each time. C and C++ executed at about 5 to 6 seconds each time, while AssemblyScript had the slowest execution times, performing between 12 and 16 seconds for each iteration. The figure \ref{fig:LS} shows the execution times for the LinearSearch algorithm in the selected languages.
+
+\hfill \break
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/LinearSearch.PNG}
+    \includegraphics[scale=0.4]{images/LinearSearch.PNG}
     \caption{LinearSearch}
     \label{fig:LS}
 \end{figure}
 
 \subsection{Sorting Algorithms}
 
-From the following visualizations, it can be determined that C and C++ consistently had the fastest execution times over the other languages, while Rust and AssemblyScript had a mixed result, with sometimes one performing better than the other.
+From the following visualizations for the sorting algorithms, it can be determined that C and C++ consistently had the fastest execution times over the other languages, while Rust and AssemblyScript had a mixed result, with sometimes one performing better than the other.
 
 \subsubsection{HeapSort}
 
 According to the statistical tests we ran on the HeapSort algorithm, C and C++ had a p-value of greater than 0.05, meaning that there was no significant difference between their execution times. This can be visually verified in figure \ref{fig:Heap}. An interesting observation is that Rust appears to start slowly and then speed up during the experiment. This experiment was repeated many times and the same behavior from Rust was always observed. The results show that C and C++ had the fastest times, followed by Rust, and AssemblyScript had the slowest times.
 
+\hfill \break
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/HeapSort.PNG}
+    \includegraphics[scale=0.4]{images/HeapSort.PNG}
     \caption{HeapSort}
     \label{fig:Heap}
 \end{figure}
 
+\hfill \break
 
 \subsubsection{MergeSort}
 
 The statistical tests performed on the MergeSort algorithm also returned a p-value greater than 0.05 for C and C++, meaning there was no significant difference between their execution times. This is visible on figure \ref{fig:Merge}. Here we can see that once again Rust starts off slower than begins to speed up. Another interesting observation is that AssemblyScript actually runs faster than Rust for this algorithm, while C and C++ have once again the fastest execution times.
 
+\hfill \break
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/MergeSort.PNG}
+    \includegraphics[scale=0.4]{images/MergeSort.PNG}
     \caption{MergeSort}
     \label{fig:Merge}
 \end{figure}
+
+\hfill \break
 
 \subsubsection{ShellSort}
 
 The p-values for the ShellSort algorithm for C and C++ again came back with values greater than 0.05, meaning that there was no significant difference between their execution times. This can be visually confirmed on figure \ref{fig:Shell}. It can also be observed that Rust once again starts off slower, then speeds up towards the end of the execution. C and C++ have the fastest execution times, while Rust and AssemblyScript have visually similar execution times.
 
+\hfill \break
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/ShellSort.PNG}
+    \includegraphics[scale=0.4]{images/ShellSort.PNG}
     \caption{ShellSort}
     \label{fig:Shell}
 \end{figure}
+
+\hfill \break
 
 \subsubsection{SelectionSort}
 
 The SelectionSort visualization shows that C and C++ have visually similar performances, however the statistical tests returned a p-value of less than 0.05. From this visualization we can see that C and C++ generally took around 4 seconds to execute, while Rust took around 8 seconds. The performance of AssemblyScript however was much slower, taking between 30 and 40 seconds for each iteration.
 
+\hfill \break
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/SelectionSort.PNG}
+    \includegraphics[scale=0.4]{images/SelectionSort.PNG}
     \caption{SelectionSort}
     \label{fig:Selection}
 \end{figure}
+
+\hfill \break
+\hfill \break
 
 \subsubsection{BubbleSort}
 
 The BubbleSort algorithm revealed great differences between the performance of AssemblyScript and the other languages. While C and C++ performed slightly faster than Rust, with execution times of around 7 to 8 seconds, and Rust with execution times of around 9 to 10 seconds, AssemblyScript had taken between 70 and 80 seconds to perform each iteration.
 
+\hfill \break
+\hfill \break
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{images/BubbleSort.PNG}
+    \includegraphics[scale=0.4]{images/BubbleSort.PNG}
     \caption{BubbleSort}
     \label{fig:Bubble}
 \end{figure}
 
 \section{Discussion}
 
-WebAssembly itself is generally still in its infancy stages, and many features are currently still being developed. This imposes some restrictions on what compilers can actually compile into WebAssembly at this time. Overall, the performance of AssemblyScript was considerably slower than Rust, C and C++.
-
-The performance times of C and C++ were consistently faster than all of the other languages. Even though the statistical tests proved that sometimes there were no significant difference between C and C++, we believe that given a much higher number of iterations in each experiment, that the statistical tests would eventually show no significant difference between all of the algorithms implemented in C and C++.
+WebAssembly is generally considered to be still in its infancy stages, and many features are still being developed. This imposes some restrictions on what compilers can actually compile into WebAssembly at this time. Overall, the performance of AssemblyScript was considerably slower than Rust, C and C++. The performance times of C and C++ were mostly faster than all of the other languages. However, there were times that Rust performed faster than C/C++ and there was one occasion where AssemblyScript performed faster than Rust. Some of the statistical test results showed that there were significant difference between C and C++, however we believe that given a much higher number of iterations in each experiment, that the statistical tests would eventually show no significant difference between all of the algorithms implemented in C and C++.
 
 Although not within the scope of this research, there was another interesting observation made regarding the compilers. The C, C++ and AssemblyScript modules usually compiled with reasonable speeds, normally ranging between 1 and 5 seconds for each algorithm. However, for the algorithms with the arrays of 100,000 elements, the Rust compiler would take around 30 minutes to compile.
 
 The research work done in this paper highlights an important aspect of WebAssembly compilers, in that they do in fact suffer from significantly different performance times, even if the source code is syntactically identical in the various different programming languages. The idea behind WebAssembly is to allow multiple languages, such as C and Rust, to be used on the web. However, since the compilers will ultimately produce different WebAssembly files with varying performances, developers should give careful consideration into which language and compiler they use to generate WebAssembly modules.
 
-Given more time to complete this research paper, the number of iterations for each algorithm would ideally be increased in order to produce a normal distribution of data and to use parametric tests to either accept of reject the hypothesis. Another aspect that could be improved is the choice of algorithms for each language. We believe that the Ostrich Benchmark Suite would be a suitable candidate. Ideally these benchmarks would be written in a large variety of programming languages, such as Haskell and Prolog, covering a variety of programming paradigms such as procedural, object-oriented, function and logical. We believe the analysis of the same algorithms written across a large spectrum of programming languages and paradigms converted into WebAssembly would provide interesting and useful insights.
+Given more time to complete this research paper, we would have included more WebAssembly compilers in our experiments and evaluations. Also, the number of iterations for each algorithm would ideally be increased in order to produce a normal distribution of data and to use parametric tests to either accept of reject the hypothesis. Another aspect that could be improved is the choice of algorithms for each language. We believe that the Ostrich Benchmark Suite would be a suitable candidate. Ideally these benchmarks would be written in a variety of programming languages, such as Haskell and Prolog, covering a variety of programming paradigms such as procedural, object-oriented, function and logical. We believe the analysis of the same algorithms written across a large spectrum of programming languages and paradigms converted into WebAssembly would provide interesting and useful insights.
 
-One final observation that we will make in our evaluation is the comparison of the total time in milliseconds that each language took to execute each of the algorithms for every iteration. This resulted in C++ being the fastest overall, followed C and Rust, with AssemblyScript being the slowest overall. This reveals that currently, although WebAssembly promises speeds of near native performance otherwise only achieved with C/C++, that WebAssembly compiled from C/C++ still provide the best performances over other languages compiled into WebAssembly. This can be viewed in figure \ref{fig:Totals}.
+One final observation that we will make in our evaluation is the comparison of the total time in milliseconds that each language took to execute each of the algorithms for every iteration. This resulted in C++ being the fastest overall, followed C and Rust, with AssemblyScript being the slowest overall. Also worth mentioning is that the Emscripten compiler is actually capable of achieving even higher optimization levels than the level -O2 that we used in our experiments, at the cost of longer compile times. However, even so, C/C++ compiled into WebAssembly with Emscripten provided the best overall performance against the other languages and compilers we evaluated. This reveals that currently, although WebAssembly promises speeds of near native performance otherwise only achieved with C/C++, that WebAssembly compiled from C/C++ still provide the best performances over other languages compiled into WebAssembly. This can be viewed in figure \ref{fig:Totals}.
 
 \begin{figure}[H]
     \centering
@@ -1185,11 +1226,13 @@ One final observation that we will make in our evaluation is the comparison of t
 
 WebAssembly is becoming more and more popular in research and web-development as it promises improved performance to compute-intensive operations for web-based applications. In this paper we critically evaluate the current literature that benchmarks WebAssembly performance compared with traditional implementations. In our opinion, there is no doubt that WebAssembly offers an exciting and efficient alternative to many of the limitations found in web-based and cloud-based applications of today. 
 
-However, we raise the concern that the performance of WebAssembly is greatly impacted by the choice of compiler used, meaning that certain programming languages will still have significant differences in their performance when compiled to WebAssembly. At the time of writing this paper, we did not find any other research paper that compares the code generated by WebAssembly compilers and evaluates their performance against each other.
+However, we raise the concern that the performance of WebAssembly is greatly impacted by the choice of compiler used, meaning that certain programming languages will still have significant differences in their performance when compiled to WebAssembly. At the time of writing this paper, we did not find any other research paper that compares the code generated by WebAssembly compilers and evaluates their performance against each other. 
+
+We also highlight that many research papers have proposed WebAssembly alternatives to native applications, performing benchmarks to evaluate the performance of WebAssembly. However, these evaluations only ever used one compiler for the generation of WebAssembly. Based on the results of our experiments, we show that different WebAssembly compilers produce different results in terms of performance. Therefore we believe that evaluating the performance of WebAssembly generated from only one compiler is not sufficient when performing evaluations between WebAssembly and native speeds.
 
 \section{Problem Definition}
 
-The objective of this research was to evaluate the performance of WebAssembly code generated by different compilers, highlighting a potential issue with the performance of the generated code. For example, if we write even a simple loop in C, C++, Rust and AssemblyScript, one might initially assume that the WebAssembly code produced by the compilers would be similar and would run without significant differences in performance. However, we have highlighted that this is not the case. As programs become more complex, the differences in performance of the generated WebAssembly code may become significant in terms of execution speed and file size.
+The objective of this research was to evaluate the performance of WebAssembly code generated by different compilers, highlighting a potential issue with the performance of the generated code. For example, if we write even a simple loop in C, C++, Rust and AssemblyScript, one might initially assume that the WebAssembly code produced by the compilers would be similar and would run without significant differences in performance. However, we have highlighted that this is not the case, demonstrating that each of the compilers produced significantly different results in terms of execution speed.
 
 \section{Design/Experimentation, Evaluation \& Results}
 
@@ -1197,27 +1240,27 @@ For our experiments, we used a selection of 11 different programs written in C, 
 
 We used NodeJS to run the WebAssembly compiled functions and measure their execution times. Each function was run a total of 120 times. Upon inspection of the data produced by these experiments, we determined that the data did not have a normal distribution. This in turn influenced the choice of statistical test that we had to use to determine whether or not there were significant differences in the performance of the compiled WebAssembly modules.
 
-Our results showed that in fact there are significant differences in the performance of WebAssembly modules generated by the different compilers, not only in terms of execution times, but upon visual inspection of the human-readable format of the WebAssembly code, we can clearly see significant differences even for simple programs compiled to WebAssembly. 
+Our results showed that in fact there are significant differences in the performance of WebAssembly modules generated by the different compilers, not only in terms of execution times, but upon visual inspection of the human-readable WAT format of the WebAssembly code, we can clearly see significant differences even for simple programs compiled to WebAssembly. 
 
 We also revealed that, although WebAssembly promises performance of near native speed otherwise only achieved with C/C++, currently WebAssembly compiled from C/C++ still offer the best performance over the other programming languages used in our research.
 
 
 \section{Contributions and impact}
 
-In this research we have identified a potential problem with WebAssembly compilers, in that they produce vastly different byte code for even simple programs, and significant differences in their performance, depending on which compiler was used to generate the WebAssembly module. As we are relatively still in the early days of WebAssembly, identifying these issues should highlight the need for some standardization in the WebAssembly code produced by compilers. We believe that this will provide valuable insights for developers as they choose which programming language to develop in and subsequently compile into WebAssembly. 
+In this research we have identified a potential problem with WebAssembly compilers, in that they produce different byte code for even simple programs, and have significant differences in their performance, depending on which compiler was used to generate the WebAssembly module. We show that even though WebAssembly promises performances of near native speeds otherwise only obtainable with C/C++ code, that when C/C++ code is compiled into WebAssembly, it still out-performes all the other languages in our experiments. We believe that this provides valuable insights for developers as they choose which programming language to develop in and subsequently compile into WebAssembly. 
 
-We also provided a critical evaluation of the literature review currently available for WebAssembly benchmarking and for WebAssembly solutions being proposed as alternatives to existing approaches in applications. We highlighted that for evaluating the performance of WebAssembly, using only one compiler is not sufficient, as different WebAssembly compilers may produce different results.
+We also provided a critical evaluation of the literature currently available for WebAssembly benchmarking and for WebAssembly solutions being proposed as alternatives to existing approaches in applications. We revealed a gap in the current literature and highlighted that for evaluating the performance of WebAssembly, using only one compiler is not sufficient, as different WebAssembly compilers may produce different results, which in turn may determine the success or failure of the WebAssembly evaluations currently being researched.
 
 
 \section{Future Work \& recommendations}
 
 In chapter 1 of this paper we identified the scope and limitations of our research. These limitations create opportunities for future work in this area. We recommend that more research be done on the comparison of code generated by WebAssembly compilers to identify the differences between their produced code and determine the reasons why these differences exist. Another area of interest could be to compare the file size of the compiled WebAssembly modules from different compilers while compiling the same programming logic.
 
-The list of programming languages that currently compile to WebAssembly can be found at \parencite{appcypher_appcypherawesome-wasm-langs_2021}. Future research could be done to evaluate the performance of these compilers. Furthermore, as more and more WebAssembly compilers emerge, programming languages with different programming paradigms will be able to compile to WebAssembly. For example, Haskell is a functional programming language, while ProLog is a logic programming language.  We believe that analysing the WebAssembly byte code and performance of functional, logical, procedural and object-oriented programming languages will be of interest to researchers and application developers.
+The list of programming languages that currently compile to WebAssembly can be found at \parencite{appcypher_appcypherawesome-wasm-langs_2021}. Future research should be done to evaluate the performance of all available WebAssembly compilers. Furthermore, as more and more compilers emerge, programming languages with different programming paradigms will be able to compile to WebAssembly, for example Haskell, a functional programming language and ProLog, a logic programming language.  We believe that analysing the WebAssembly byte code and performance of functional, logical, procedural and object-oriented programming languages will be of interest to researchers and application developers.
 
 The Ostrich Benchmark Suite was published in \parencite{Khan2015}. They identified important patterns for numerical computation and ran experiments to compare JavaScript performance against native C code for sequential and parallel operations. Therefore another possibility for future work would be to implement the numerical computing benchmarks identified in the Ostrich Benchmark Suite in multiple programming languages, including languages from different programming paradigms such as procedural, functional, logical and object-oriented, and evaluating the performance of these benchmarks in WebAssembly from multiple compilers.
 
-Finally, since our experiments were all executed on only a NodeJS environment, future work might also involve running such experiments on all modern web-browsers and various IoT devices.
+Finally, since our experiments were only executed on a NodeJS environment, future work might also involve running such experiments on all web-browsers and IoT devices.
 
 % End of thesis content
 % ============================================================= %
@@ -1827,11 +1870,11 @@ Figure \ref{fig:AppendixSelectionSort} shows the distribution of data for the Se
 
 \hfill \break
 
-Figure \ref{fig:ASDist} represents the distribution of data for all the algorithms used in our experiments compiled from AssemblyScript.
+Figure \ref{fig:ASDist2} represents the distribution of data for all the algorithms used in our experiments compiled from AssemblyScript.
 
 \begin{figure}[H]
     \caption{AssemblyScript Distribtion}
-    \label{fig:ASDist}
+    \label{fig:ASDist2}
     \centering
         \subfloat[BinarySearch]{\label{sfig:a}\includegraphics[width=.3\textwidth]{images/AssemblyScript-BinarySearch.PNG}}\hfill
         \subfloat[BubbleSort]{\label{sfig:a}\includegraphics[width=.3\textwidth]{images/AssemblyScript-BubbleSort.PNG}}\hfill
