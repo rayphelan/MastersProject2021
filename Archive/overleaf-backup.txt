@@ -189,11 +189,11 @@ Finally, I would like to thank my classmates that I have had the pleasure of get
 \chapter{Introduction}
 \section{Background}
 
-WebAssembly, also known as WASM, is a new technology revolutionizing the web. It is a low-level binary instruction set, similar to pure assembly language, designed to run at near-native speeds otherwise only achieved with C/C++ code. It can be run on the client-side in web-browsers, on the server-side with NodeJS, and even as a stand-alone environment beyond the web, known as WASI (WebAssembly System Interface) \footnote{https://wasi.dev/}.
+WebAssembly, also known as WASM, is a new technology revolutionizing the web. It is a low-level binary instruction set, similar to pure assembly language, designed to run at near-native speeds otherwise only achieved with C/C++ code. It can be run on the client-side in web-browsers, on the server-side with NodeJS, and even as a stand-alone environment beyond the web, known as WASI (WebAssembly System Interface)\footnote{https://wasi.dev/}.
 
 WebAssembly was first announced on December 5th, 2019, by the World Wide Web Consortium (W3C). For many years, JavaScript has been the only option for providing interactive applications in websites \parencite{Musch2019}, although there have been many attempts to remedy this, for example Adobe Flash and Microsoft Active-X. However, these needed to be installed as browser extensions which prevented them from large scale acceptance. WebAssembly on the other hand, requires no extensions to be installed and is already supported by all of the major web-browsers.
 
-Programs written in statically typed languages, such as C, C++, and Rust can now be compiled into WebAssembly. As JavaScript is a dynamically typed language, it cannot be directly compiled into WebAssembly. TypeScript however, a subset of the JavaScript language, can be compiled into WebAssembly. Many other programming languages are currently working towards enabling compilation to WebAssembly and are currently listed here \footnote{https://github.com/appcypher/
+Programs written in statically typed languages, such as C, C++, and Rust can now be compiled into WebAssembly. As JavaScript is a dynamically typed language, it cannot be directly compiled into WebAssembly. TypeScript however, a subset of the JavaScript language, can be compiled into WebAssembly. Many other programming languages are currently working towards enabling compilation to WebAssembly and are currently listed online\footnote{https://github.com/appcypher/
 awesome-wasm-langs}. This opens the door for many new possibilities as developers from these languages can now develop for the web, where previously this was not possible.
 
 As WebAssembly is essentially binary code, this cannot be easily understood by human readers. There is however a textual representation of WebAssembly, known as WAT (WebAssembly Text Format)\footnote{https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format}. There are tools available for converting pure WebAssembly binary code into WAT format and vice-versa, such as the WABT tool\footnote{https://github.com/WebAssembly/wabt}. C and C++ can be compiled to WebAssembly using the Emscripten\footnote{https://emscripten.org/} compiler and Rust can be compiled using the wasm-pack\footnote{https://rustwasm.github.io/wasm-pack/installer/} compiler. AssemblyScript\footnote{https://www.assemblyscript.org/} is a variant of TypeScript which can compile directly to WebAssembly. These compilers will be the focus of this research project.
@@ -248,7 +248,7 @@ Another important aspect of this research paper worth highlighting is that we di
 
 This research project will be divided into logical chapters. Chapter 1 provides some background knowledge on WebAssembly in general. Here we explain the research problem we have identified and present the research question. We also describe the research objectives and methodologies used. Finally we provide an insight into the scope and limitations of this research.
 
-Chapter 2 will involve a review of the current literature based on relevant scientific publications in order to highlight the research gaps and importance of our research question. Chapter 3 describes the experiment design and set up used to gather the required data for our evalutation. Chapter 4 will provide an in-dept evaluation and discussion on the results gathered through our statistical tests. Finally, chapter 5 will provide a conclusion to this research, describing the impact of our contributions and outlining future work.
+Chapter 2 will involve a review of the current literature based on relevant scientific publications in order to highlight the research gaps and importance of our research question. Chapter 3 describes the experiment design and set up used to gather the required data for our evaluation. Chapter 4 will provide an in-dept evaluation and discussion on the results gathered through our statistical tests. Finally, chapter 5 will provide a conclusion to this research, describing the impact of our contributions and outlining future work.
 
 
 % Literature review chapter
@@ -281,7 +281,7 @@ A WebAssembly solution to the stateless containers used by existing serverless p
 
 \Textcite{Jeong2019} proposed an edge computing framework for offloading JavaScript and WebAssembly state between mobile devices, edge computing devices and cloud services. This system saves the state of JavaScript workers, objects and WebAssembly functions, and enables the transfer and restoration of these between devices, resulting in an 8.4x speedup compared with only offloading pure JavaScript code. All the WebAssembly files used in their experiments were generated from C++ code using the Emscripten compiler. Once again, this highlights the gap of knowing how WebAssembly from other compilers would have performed in these experiments.
 
-WebAssembly was proposed in \parencite{Long2021} as a lightweight alternative for serverless Function as a Service environments, that could enable fine grained resource consumption at runtime, as WebAssembly functions can be started and stopped on demand. They concluded that WebAssembly VMs outperform Docker containers and have a smaller footprint. However, only the Emscripten WebAssembly compiler was used to generate the WebAssembly bytecode for their evaluations.
+WebAssembly was proposed in \parencite{Long2021} as a lightweight alternative for serverless Function as a Service environments, that could enable fine grained resource consumption at runtime, as WebAssembly functions can be started and stopped on demand. They concluded that WebAssembly VMs outperform Docker containers and have a smaller footprint. However, only the Emscripten WebAssembly compiler was used to generate the WebAssembly byte code for their evaluations.
 
 \Textcite{Hall2019} also proposed WebAssembly as an alternative to traditional Dockerised containers for serverless functions in edge computing. They found that WebAssembly can provide many of the same isolation requirements, such as memory safety and security, while eliminating the cold start time penalty that traditional serverless containers incur. Once again, the WebAssembly modules used in their experiments were all generated from C++ code compiled into WebAssembly using the Emscripten compiler.
 
@@ -312,11 +312,11 @@ After installing the WebAssembly compilers for each of the selected languages an
 
 As an example, if we write a simple Fibonacci algorithm in C/C++, AssemblyScript and Rust, maintaining identical syntax between the languages, will they all have the same performance when compiled into WebAssembly and run on the same environment? In order to answer our research question using the scientific methods mentioned in chapter 1, we propose the following hypotheses:
 
-\subsubsection{H0 - Null Hpyothesis:}
+\subsubsection{H0 - Null Hypothesis:}
 
 \begin{quote}\emph{There is no significant difference in the performance of WebAssembly modules, in terms of execution times, for the same program written in different programming languages and compiled into WebAssembly using their respective compilers.}\end{quote}
 
-\subsubsection{H1 - Alternate Hpyothesis:}
+\subsubsection{H1 - Alternate Hypothesis:}
 
 \begin{quote}\emph{There is a significant difference in the performance of WebAssembly modules, in terms of execution times, for the same program written in different programming languages and compiled into WebAssembly using their respective compilers.}\end{quote}
 
@@ -472,7 +472,7 @@ The optimization levels that Emscripten provides are listed in table \ref{tab:em
   \label{tab:emscripten}
 \end{table}
 
-Emscripten also takes an arguement to modularize the code. This means that the compiler will generate the JavaScript glue file in such a way that allows it to be imported as a JavaScript module. The compiler puts all of the required JavaScript into a factory function which can be called on to create an instance of the WebAssembly module. The following code in listing \ref{lst:BinaryCWasm} shows how the WebAssembly file and the JavaScript glue file were generated using Emscripten for the BinarySearch algorithm. 
+Emscripten also takes an argument to modularize the code. This means that the compiler will generate the JavaScript glue file in such a way that allows it to be imported as a JavaScript module. The compiler puts all of the required JavaScript into a factory function which can be called on to create an instance of the WebAssembly module. The following code in listing \ref{lst:BinaryCWasm} shows how the WebAssembly file and the JavaScript glue file were generated using Emscripten for the BinarySearch algorithm. 
 
 \begin{lstlisting}[caption={Compiling BinarySearch from C to WebAssembly},label={lst:BinaryCWasm},language=Emscripten,basicstyle=\scriptsize,style=myStyle]
 emcc binarySearch.c -o binarySearch.js -O2 
@@ -492,7 +492,7 @@ npm run asbuild
 
 To compile Rust to WebAssembly, the wasm-pack compiler was used. Instructions for creating new wasm-pack applications can be found on our Github Repository. We created a new wasm-pack application for each of our selected algorithms. Once inside the directory of the wasm-pack application created for each algorithm, the WebAssembly modules can be compiled.
 
-We passed an option to the compiler to note that we were targetting the NodeJS environment. This customizes the JavaScript glue file so it can be easily run in NodeJS. Wasm-pack allows us to specify whether or not the build should be optimized for production, using the --release keyword. However if no keyword is provided, the --release profile is automatically used. This was the optimization levels used in our experiments. The following code in listing \ref{lst:wasmpack} shows how the WebAssembly and JavaScript files were generated for Rust.
+We passed an option to the compiler to note that we were targeting the NodeJS environment. This customizes the JavaScript glue file so it can be easily run in NodeJS. Wasm-pack allows us to specify whether or not the build should be optimized for production, using the --release keyword. However if no keyword is provided, the --release profile is automatically used. This was the optimization levels used in our experiments. The following code in listing \ref{lst:wasmpack} shows how the WebAssembly and JavaScript files were generated for Rust.
 
 \begin{lstlisting}[caption={Rust to WebAssembly},label={lst:wasmpack},language=Rust,basicstyle=\scriptsize,style=myStyle]
 wasm-pack build --target nodejs
@@ -669,6 +669,8 @@ wilcox.test(AssemblyScript$BinarySearch,Rust$BinarySearch)
 
 The values represented in following the results are the p-value. In order to facilitate the visualisataion of the results, we have divided the results into two tables. The first table \ref{tab:MannWU1} shows the results of AssemblyScript vs C, AssemblyScript vs C++ and AssemblyScript vs Rust. The second table \ref{tab:MannWU2} shows the results of C vs C++, C vs Rust and C++ vs Rust.
 
+In this chapter we described the VM and software set up required to be able to reproduce the experiments. We provided explanations and justifications for the algorithms used. Compiling the code into WebAssembly and details on how the benchmarks were executed and how the data was gathered were also described. Finally, we provided details on how the statistical tests were used on the data. In the next chapter, we will perform an in-dept evaluation and discussion of the results gathered through the experiments.
+
 \begin{table}[H]
   \centering
     \begin{tabular}{| c | c | c | c |}
@@ -723,11 +725,11 @@ The main objective of our experiments was to answer the research question by eit
 
 \begin{quote}\emph{Is there a significant difference in the performance of WebAssembly modules, in terms of execution times, for the same program written in different programming languages and compiled into WebAssembly using their respective compilers?}\end{quote}
 
-\subsubsection{H0 - Null Hpyothesis:}
+\subsubsection{H0 - Null Hypothesis:}
 
 \begin{quote}\emph{There is no significant difference in the performance of WebAssembly modules, in terms of execution times, for the same program written in different programming languages and compiled into WebAssembly using their respective compilers.}\end{quote}
 
-\subsubsection{H1 - Alternate Hpyothesis:}
+\subsubsection{H1 - Alternate Hypothesis:}
 
 \begin{quote}\emph{There is a significant difference in the performance of WebAssembly modules, in terms of execution times, for the same program written in different programming languages and compiled into WebAssembly using their respective compilers.}\end{quote}
 
@@ -1207,6 +1209,8 @@ Given more time to complete this research paper, we would have included more Web
 
 One final observation that we will make in our evaluation is the comparison of the total time in milliseconds that each language took to execute each of the algorithms for every iteration. This resulted in C++ being the fastest overall, followed C and Rust, with AssemblyScript being the slowest overall. Also worth mentioning is that the Emscripten compiler is actually capable of achieving even higher optimization levels than the level -O2 that we used in our experiments, at the cost of longer compile times. However, even so, C/C++ compiled into WebAssembly with Emscripten provided the best overall performance against the other languages and compilers we evaluated. This reveals that currently, although WebAssembly promises speeds of near native performance otherwise only achieved with C/C++, that WebAssembly compiled from C/C++ still provide the best performances over other languages compiled into WebAssembly. This can be viewed in figure \ref{fig:Totals}.
 
+In this chapter, we provided an evaluation on the statistical test results and the visual representations for the execution times of each algorithm. We provided a discussion on the findings of our evaluations, highlighting the importance of our research question. In the next chapter, we will conclude our research, based on the findings we discovered through our experiments and evaluations.
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{images/Totals.PNG}
@@ -1242,7 +1246,7 @@ We also revealed that, although WebAssembly promises performance of near native 
 
 \section{Contributions and impact}
 
-In this research we have identified a potential problem with WebAssembly compilers, in that they produce different byte code for even simple programs, and have significant differences in their performance, depending on which compiler was used to generate the WebAssembly module. We show that even though WebAssembly promises performances of near native speeds otherwise only obtainable with C/C++ code, that when C/C++ code is compiled into WebAssembly, it still out-performes all the other languages in our experiments. We believe that this provides valuable insights for developers as they choose which programming language to develop in and subsequently compile into WebAssembly. 
+In this research we have identified a potential problem with WebAssembly compilers, in that they produce different byte code for even simple programs, and have significant differences in their performance, depending on which compiler was used to generate the WebAssembly module. We show that even though WebAssembly promises performances of near native speeds otherwise only obtainable with C/C++ code, that when C/C++ code is compiled into WebAssembly, it still outperforms all the other languages in our experiments. We believe that this provides valuable insights for developers as they choose which programming language to develop in and subsequently compile into WebAssembly. 
 
 We also provided a critical evaluation of the literature currently available for WebAssembly benchmarking and for WebAssembly solutions being proposed as alternatives to existing approaches in applications. We revealed a gap in the current literature and highlighted that for evaluating the performance of WebAssembly, using only one compiler is not sufficient, as different WebAssembly compilers may produce different results, which in turn may determine the success or failure of the WebAssembly evaluations currently being researched.
 
@@ -1260,7 +1264,7 @@ Finally, since our experiments were only executed on a NodeJS environment, futur
 % End of thesis content
 % ============================================================= %
 
-% Include the bibligraphy by referencing the correct .bib file
+% Include the bibliography by referencing the correct .bib file
 \printbibliography
 
 % Optional appendices
